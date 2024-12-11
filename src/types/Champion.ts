@@ -1,4 +1,11 @@
-interface Champion {
+export interface ChampionListResponse {
+  type: string; // 응답 타입
+  format: string; // 데이터 형식
+  version: string; // API 버전
+  data: { [key: string]: Champion }; // 챔피언 ID를 키로 하는 챔피언 객체의 맵
+}
+
+export interface Champion {
   id: string; // 챔피언 ID
   key: string; // 챔피언 키
   name: string; // 챔피언 이름
@@ -7,7 +14,7 @@ interface Champion {
   tags: string[]; // 태그
 }
 
-interface ChampionDetail extends Champion {
+export interface ChampionDetail extends Champion {
   version: string; // 버전
   blurb: string; // 설명
   info: ChampionInfo; // 정보
@@ -15,7 +22,7 @@ interface ChampionDetail extends Champion {
   stats: ChampionStats; // 통계
 }
 
-interface ChampionImage {
+export interface ChampionImage {
   full: string; // 전체 이미지 파일 이름
   sprite: string; // 스프라이트 이미지 파일 이름
   group: string; // 그룹 이름
@@ -25,14 +32,14 @@ interface ChampionImage {
   h: number; // 높이
 }
 
-interface ChampionInfo {
+export interface ChampionInfo {
   attack: number; // 공격력
   defense: number; // 방어력
   magic: number; // 마법 능력치
   difficulty: number; // 난이도
 }
 
-interface ChampionStats {
+export interface ChampionStats {
   hp: number; // 체력
   hpperlevel: number; // 레벨당 체력 증가량
   mp: number; // 마나
