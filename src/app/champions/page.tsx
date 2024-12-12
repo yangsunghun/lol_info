@@ -1,32 +1,23 @@
-"use client";
-
 import { ChampionListResponse } from "@/types/Champion";
 import { fetchChampionList } from "@/utils/serverApi";
-import React, { useEffect, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 
 const page = () => {
-  const [champions, setChampions] = useState<ChampionListResponse | null>(null);
-  const [loading, setLoading] = useState(true);
+  const {
+    data: champions,
+    isPending,
+    isError,
+  } = useQuery<ChampionListResponse, Error>({
+    queryKey: ["championList"],
+    queryFn: fetchChampionList,
+  });
 
-  // 챔피언 데이터 가져오기
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const championData = await fetchChampionList();
-
-        setChampions(championData);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchData();
-  }, []);
-
-  if (loading) {
+  if (isPending) {
     return <div>Loading...</div>;
+  }
+
+  if (isError) {
+    return <div>Error</div>;
   }
 
   return (

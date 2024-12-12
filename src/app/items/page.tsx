@@ -2,33 +2,24 @@
 
 import { ItemListResponse } from "@/types/Item";
 import { fetchItemList } from "@/utils/serverApi";
-import Image from "next/image";
-import React, { useEffect, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 
 const page = () => {
-  const [items, setItems] = useState<ItemListResponse | null>(null);
-  const [loading, setLoading] = useState(true);
+  const {
+    data: items,
+    isPending,
+    isError,
+  } = useQuery<ItemListResponse, Error>({
+    queryKey: ["championList"],
+    queryFn: fetchItemList,
+  });
 
-  // 챔피언 데이터 가져오기
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const championData = await fetchItemList();
-        //const itemData = await fetchItemList();
-        setItems(championData);
-        //setItems(itemData);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchData();
-  }, []);
-
-  if (loading) {
+  if (isPending) {
     return <div>Loading...</div>;
+  }
+
+  if (isError) {
+    return <div>Error</div>;
   }
 
   return (
@@ -39,11 +30,9 @@ const page = () => {
           Object.values(items.data).map((item) => (
             <div key={item.id}>
               <h2>{item?.name}</h2>
-              <Image
-                src={`https://ddragon.leagueoflegends.com/cdn/img/item/${item.image.full}`}
+              <img
+                src={`https://ddragon.leagueoflegends.com/cdn/14.24.1/img/item/${item.image.full}`}
                 alt=""
-                width={100}
-                height={100}
               />
               <p>{item.description}</p>
             </div>

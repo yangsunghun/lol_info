@@ -21,13 +21,13 @@ export const fetchChampionList = async (): Promise<ChampionListResponse> => {
     );
 
     if (!response.ok) {
-      throw new Error("Failed to fetch champion list");
+      throw new Error("챔피언 목록을 불러오는데에 실패했습니다.");
     }
 
     const data: ChampionListResponse = await response.json();
     return data;
   } catch (error) {
-    console.error("Error fetching champion list:", error);
+    console.error("챔피언 목록을 불러오는데에 실패했습니다.", error);
     throw error;
   }
 };
@@ -41,13 +41,13 @@ export const fetchItemList = async (): Promise<any> => {
     );
 
     if (!response.ok) {
-      throw new Error("Failed to fetch item list");
+      throw new Error("목록을 불러오는데에 실패했습니다.");
     }
 
     const data = await response.json();
     return data;
   } catch (error) {
-    console.error("Error fetching item list:", error);
+    console.error("목록을 불러오는데에 실패했습니다.", error);
     throw error;
   }
 };

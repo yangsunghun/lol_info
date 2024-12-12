@@ -21,7 +21,7 @@ export const getChampionRotation = async (): Promise<ChampionRotation> => {
 
     if (!response.ok) {
       const errorData = await response.json();
-      console.error("Riot API Error:", errorData); // 에러 로그 출력
+      console.error("Riot API Error:", errorData);
       throw new Error(errorData.message || "Failed to fetch champion rotation");
     }
 
