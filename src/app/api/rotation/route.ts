@@ -10,7 +10,7 @@ if (!API_KEY) {
 export const getChampionRotation = async (): Promise<ChampionRotation> => {
   try {
     const response = await fetch(
-      `https://kr.api.riotgames.com/lol/platform/v3/champion-rotations?api_key=${API_KEY}`,
+      `https://kr.api.riotgames.com/lol/platform/v3/champion-rotations`,
       {
         method: "GET",
         headers: {
@@ -26,10 +26,10 @@ export const getChampionRotation = async (): Promise<ChampionRotation> => {
     }
 
     const data: ChampionRotation = await response.json();
-    return data; // 챔피언 로테이션 데이터 반환
+    return data;
   } catch (error) {
     console.error("Error fetching champion rotation:", error);
-    throw error; // 에러를 호출자에게 전달
+    throw error;
   }
 };
 

@@ -28,7 +28,7 @@ export const fetchChampionList = async (): Promise<ChampionListResponse> => {
     return data;
   } catch (error) {
     console.error("Error fetching champion list:", error);
-    throw error; // 에러를 호출자에게 전달
+    throw error;
   }
 };
 
@@ -45,9 +45,9 @@ export const fetchItemList = async (): Promise<any> => {
     }
 
     const data = await response.json();
-    return data; // 아이템 목록 반환
+    return data;
   } catch (error) {
     console.error("Error fetching item list:", error);
-    throw error; // 에러를 호출자에게 전달
+    throw error;
   }
 };

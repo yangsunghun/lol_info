@@ -13,9 +13,8 @@ const page = () => {
     const fetchData = async () => {
       try {
         const championData = await fetchChampionList();
-        //const itemData = await fetchItemList();
+
         setChampions(championData);
-        //setItems(itemData);
       } catch (error) {
         console.error("Error fetching data:", error);
       } finally {
@@ -39,9 +38,10 @@ const page = () => {
           <div key={champion.id}>
             <h2>{champion.name}</h2>
             <img
-              src={`https://ddragon.leagueoflegends.com/cdn/img/champion/splash/${champion.image.full}`}
+              src={`https://ddragon.leagueoflegends.com/cdn/14.24.1/img/champion/${champion.image.full}`}
               alt=""
             />
+            <p>{champion.image.full}</p>
             <p>{champion.title}</p>
           </div>
         ))}
