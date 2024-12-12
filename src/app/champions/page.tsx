@@ -1,42 +1,23 @@
 import { ChampionListResponse } from "@/types/Champion";
 import { fetchChampionList } from "@/utils/serverApi";
-import { useQuery } from "@tanstack/react-query";
+import ChampionList from "./_components/ChampionList";
 
-const page = () => {
-  const {
-    data: champions,
-    isPending,
-    isError,
-  } = useQuery<ChampionListResponse, Error>({
-    queryKey: ["championList"],
-    queryFn: fetchChampionList,
-  });
+const page = async () => {
+  let champions: ChampionListResponse;
 
-  if (isPending) {
-    return <div>Loading...</div>;
-  }
-
-  if (isError) {
-    return <div>Error</div>;
+  try {
+    champions = await fetchChampionList();
+  } catch (error) {
+    console.error("서버 상태가 원활하지 않습니다", error);
+    return <div>서버 상태가 원활하지 않습니다. 불편을 드려 죄송합니다.</div>;
   }
 
   return (
-    <>
-      <h1>챔피언 목록</h1>
+    <div className="inner m-center">
+      <h2 className="page-title">챔피언 목록</h2>
 
-      {champions &&
-        Object.values(champions.data).map((champion) => (
-          <div key={champion.id}>
-            <h2>{champion.name}</h2>
-            <img
-              src={`https://ddragon.leagueoflegends.com/cdn/14.24.1/img/champion/${champion.image.full}`}
-              alt=""
-            />
-            <p>{champion.image.full}</p>
-            <p>{champion.title}</p>
-          </div>
-        ))}
-    </>
+      <ChampionList championData={champions} />
+    </div>
   );
 };
 

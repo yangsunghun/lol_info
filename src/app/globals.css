@@ -3,9 +3,39 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
+  --foreground-rgb: 255, 255, 255;
+  --background-start-rgb: 51, 51, 51;
   --background-end-rgb: 255, 255, 255;
+}
+
+@layer components {
+  .inner {
+    width: 1400px;
+  }
+  .flex-box {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  .m-center {
+    margin: 0 auto;
+  }
+
+  .page-title {
+    margin: 100px 0;
+    text-align: center;
+    font-size: 36px;
+  }
+
+  .list-item {
+    padding: 10px;
+    text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+  }
+
+  .list-item img {
+    display: inline-block;
+  }
 }
 
 @media (prefers-color-scheme: dark) {
@@ -18,12 +48,7 @@
 
 body {
   color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  background: rgb(var(--background-start-rgb));
 }
 
 @layer utilities {

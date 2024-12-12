@@ -1,4 +1,5 @@
 import { ChampionListResponse } from "@/types/Champion";
+import { ItemListResponse } from "@/types/Item";
 
 // 최신 버전을 가져오는 함수
 const getLatestVersion = async (): Promise<string> => {
@@ -33,7 +34,7 @@ export const fetchChampionList = async (): Promise<ChampionListResponse> => {
 };
 
 // 모든 아이템 목록을 가져오는 함수
-export const fetchItemList = async (): Promise<any> => {
+export const fetchItemList = async (): Promise<ItemListResponse> => {
   try {
     const version = await getLatestVersion();
     const response = await fetch(

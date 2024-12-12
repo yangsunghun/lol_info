@@ -1,25 +1,14 @@
-"use client";
-
 import { ItemListResponse } from "@/types/Item";
 import { fetchItemList } from "@/utils/serverApi";
-import { useQuery } from "@tanstack/react-query";
 
-const page = () => {
-  const {
-    data: items,
-    isPending,
-    isError,
-  } = useQuery<ItemListResponse, Error>({
-    queryKey: ["championList"],
-    queryFn: fetchItemList,
-  });
+const page = async () => {
+  let items: ItemListResponse;
 
-  if (isPending) {
-    return <div>Loading...</div>;
-  }
-
-  if (isError) {
-    return <div>Error</div>;
+  try {
+    items = await fetchItemList();
+  } catch (error) {
+    console.error("데이터를 불러올 수 없습니다.", error);
+    return <div>데이터를 불러올 수 없습니다. 불편을 드려 죄송합니다.</div>;
   }
 
   return (
