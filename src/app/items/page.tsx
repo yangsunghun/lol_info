@@ -16,14 +16,15 @@ const page = async () => {
       <h1>아이템 목록</h1>
       <div>
         {items &&
-          Object.values(items.data).map((item) => (
-            <div key={item.id}>
-              <h2>{item?.name}</h2>
+          Object.values(items.data).map((item, index) => (
+            <div key={index}>
+              <h2>{index}</h2>
+              <h2>{item.name}</h2>
               <img
                 src={`https://ddragon.leagueoflegends.com/cdn/14.24.1/img/item/${item.image.full}`}
                 alt=""
               />
-              <p>{item.description}</p>
+              <p>{item.plaintext}</p>
             </div>
           ))}
       </div>
