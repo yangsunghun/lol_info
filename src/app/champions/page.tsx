@@ -1,6 +1,6 @@
 import { ChampionListResponse } from "@/types/Champion";
 import { fetchChampionList } from "@/utils/serverApi";
-import ChampionList from "./_components/ChampionList";
+import CardItem from "@/components/CardItem";
 
 const ChampionPage = async () => {
   let champions: ChampionListResponse;
@@ -16,7 +16,12 @@ const ChampionPage = async () => {
     <div className="inner m-center">
       <h2 className="page-title">챔피언 목록</h2>
 
-      <ChampionList championData={champions} />
+      <ul className="grid grid-cols-5 gap-5">
+        {champions &&
+          Object.values(champions.data).map((champion) => (
+            <CardItem key={champion.id} champion={champion} />
+          ))}
+      </ul>
     </div>
   );
 };

@@ -1,5 +1,5 @@
 import React from "react";
-import { ChampionListResponse, Champion } from "@/types/Champion";
+import { ChampionListResponse } from "@/types/Champion";
 import CardItem from "@/components/CardItem";
 
 interface ChampionListProps {
