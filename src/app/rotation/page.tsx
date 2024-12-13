@@ -21,7 +21,7 @@ const Page = async () => {
   const freeChampions = rotation.freeChampionIds
     .map((id) =>
       Object.values(champions.data).find(
-        (champion) => champion.key === id.toString() // champion의 key는 문자열로 저장된 숫자라서
+        (champion) => champion.key === id.toString() // champion의 key는 문자열로 저장된 숫자라서 변환
       )
     )
     .filter(Boolean); // 일치하는 값들만 남기기
