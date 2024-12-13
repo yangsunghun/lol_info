@@ -12,14 +12,23 @@ export interface Champion {
   title: string; // 챔피언 제목
   image: ChampionImage; // 이미지 정보
   tags: string[]; // 태그
+  skins?: ChampionSkin[]; // 스킨 정보 (선택적)
+  lore?: string; // 챔피언 전투 이야기 (선택적)
+  blurb?: string; // 챔피언 설명 (선택적)
+  allytips?: string[]; // 아군 팁 (선택적)
+  enemytips?: string[]; // 적군 팁 (선택적)
+  partype?: string; // 자원 타입
+  info?: ChampionInfo; // 정보
+  stats?: ChampionStats; // 통계
+  spells?: ChampionSpell[]; // 스펠 정보 (선택적)
+  passive?: ChampionPassive; // 패시브 정보 (선택적)
 }
 
-export interface ChampionDetail extends Champion {
-  version: string; // 버전
-  blurb: string; // 설명
-  info: ChampionInfo; // 정보
-  partype: string; // 자원 타입
-  stats: ChampionStats; // 통계
+export interface ChampionDetail {
+  type: string; // 타입 (champion)
+  format: string; // 데이터 형식 (standAloneComplex)
+  version: string; // API 버전
+  data: { [key: string]: Champion }; // 챔피언 데이터, 챔피언 이름을 키로
 }
 
 export interface ChampionImage {
@@ -30,6 +39,38 @@ export interface ChampionImage {
   y: number; // 스프라이트 내 y 좌표
   w: number; // 너비
   h: number; // 높이
+}
+
+export interface ChampionSkin {
+  id: string; // 스킨 ID
+  num: number; // 스킨 번호
+  name: string; // 스킨 이름
+  chromas: boolean; // 크로마 여부
+}
+
+export interface ChampionPassive {
+  name: string; // 패시브 스킬 이름
+  description: string; // 패시브 스킬 설명
+  image: ChampionImage; // 패시브 이미지 정보
+}
+
+export interface ChampionSpell {
+  id: string; // 스펠 ID
+  name: string; // 스펠 이름
+  description: string; // 스펠 설명
+  tooltip: string; // 툴팁
+  leveltip: {
+    label: string[]; // 레벨 팁 레이블
+    effect: string[]; // 레벨 팁 효과
+  };
+  maxrank: number; // 최대 레벨
+  cooldown: number[]; // 재사용 대기시간
+  cooldownBurn: string; // 재사용 대기시간 문자열
+  cost: number[]; // 소모 마나
+  costBurn: string; // 소모 마나 문자열
+  range: number[]; // 범위
+  image: ChampionImage; // 스펠 이미지 정보
+  resource: string; // 자원 타입
 }
 
 export interface ChampionInfo {

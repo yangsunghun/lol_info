@@ -1,7 +1,7 @@
 import { ItemListResponse } from "@/types/Item";
 import { fetchItemList } from "@/utils/serverApi";
 
-const page = async () => {
+const ItemPage = async () => {
   let items: ItemListResponse;
 
   try {
@@ -13,17 +13,16 @@ const page = async () => {
 
   return (
     <>
-      <h1>아이템 목록</h1>
+      <h2 className="page-title">아이템 목록</h2>
       <div>
         {items &&
-          Object.values(items.data).map((item, index) => (
-            <div key={index}>
-              <h2>{index}</h2>
-              <h2>{item.name}</h2>
+          Object.entries(items.data).map(([key, item]) => (
+            <div key={key}>
               <img
                 src={`https://ddragon.leagueoflegends.com/cdn/14.24.1/img/item/${item.image.full}`}
                 alt=""
               />
+              <p>{item.name}</p>
               <p>{item.plaintext}</p>
             </div>
           ))}
@@ -32,4 +31,4 @@ const page = async () => {
   );
 };
 
-export default page;
+export default ItemPage;

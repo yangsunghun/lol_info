@@ -2,7 +2,7 @@ import { ChampionListResponse } from "@/types/Champion";
 import { fetchChampionList } from "@/utils/serverApi";
 import ChampionList from "./_components/ChampionList";
 
-const page = async () => {
+const ChampionPage = async () => {
   let champions: ChampionListResponse;
 
   try {
@@ -21,4 +21,4 @@ const page = async () => {
   );
 };
 
-export default page;
+export default ChampionPage;
