@@ -1,9 +1,10 @@
 import { ChampionListResponse } from "@/types/Champion";
-import { fetchChampionList } from "@/utils/serverApi";
-import CardItem from "@/components/CardItem";
+import { fetchChampionList, getLatestVersion } from "@/utils/serverApi";
+import CardItem from "@/components/ui/CardItem";
 
 const ChampionPage = async () => {
   let champions: ChampionListResponse;
+  const version = await getLatestVersion();
 
   try {
     champions = await fetchChampionList();
@@ -19,7 +20,13 @@ const ChampionPage = async () => {
       <ul className="grid grid-cols-5 gap-5">
         {champions &&
           Object.values(champions.data).map((champion) => (
-            <CardItem key={champion.id} champion={champion} />
+            <CardItem
+              key={champion.id}
+              cardId={champion.id}
+              cardName={champion.name}
+              descript={champion.title}
+              img={`https://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${champion.image.full}`}
+            />
           ))}
       </ul>
     </div>

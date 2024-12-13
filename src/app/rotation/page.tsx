@@ -2,6 +2,7 @@ import { ChampionListResponse } from "@/types/Champion";
 import { ChampionRotation } from "@/types/ChampionRotation";
 import { fetchChampionList, getLatestVersion } from "@/utils/serverApi";
 import { getChampionRotation } from "../api/rotation/route";
+import CardItem from "@/components/ui/CardItem";
 
 const Page = async () => {
   const version = await getLatestVersion();
@@ -35,41 +36,40 @@ const Page = async () => {
     )
     .filter(Boolean);
 
-  console.log(freeChampions);
-  console.log(newPlayerChampions);
+  // console.log(freeChampions);
+  // console.log(newPlayerChampions);
 
   return (
-    <div>
-      <h2>무료 챔피언 목록</h2>
-      <ul>
+    <div className="inner m-center">
+      <h2 className="page-title">무료 챔피언 목록</h2>
+
+      <ul className="grid grid-cols-5 gap-5">
         {freeChampions.map(
           (champion) =>
             champion && (
-              <li key={champion.id}>
-                <h2>{champion.name}</h2>
-                <p>{champion.title}</p>
-                <img
-                  src={`https://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${champion.image.full}`}
-                  alt={champion.name}
-                />
-              </li>
+              <CardItem
+                key={champion.id}
+                cardId={champion.id}
+                cardName={champion.name}
+                descript={champion.title}
+                img={`https://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${champion.image.full}`}
+              />
             )
         )}
       </ul>
 
-      <h2>신규 플레이어를 위한 무료 챔피언 목록</h2>
-      <ul>
+      <h2 className="page-title">신규 플레이어를 위한 무료 챔피언 목록</h2>
+      <ul className="grid grid-cols-5 gap-5">
         {newPlayerChampions.map(
           (champion) =>
             champion && (
-              <li key={champion.id}>
-                <h2>{champion.name}</h2>
-                <p>{champion.title}</p>
-                <img
-                  src={`https://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${champion.image.full}`}
-                  alt={champion.name}
-                />
-              </li>
+              <CardItem
+                key={champion.id}
+                cardId={champion.id}
+                cardName={champion.name}
+                descript={champion.title}
+                img={`https://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${champion.image.full}`}
+              />
             )
         )}
       </ul>

@@ -1,3 +1,4 @@
+import CardItem from "@/components/ui/CardItem";
 import { ItemListResponse } from "@/types/Item";
 import { fetchItemList } from "@/utils/serverApi";
 
@@ -12,22 +13,22 @@ const ItemPage = async () => {
   }
 
   return (
-    <>
+    <div className="inner m-center">
       <h2 className="page-title">아이템 목록</h2>
-      <div>
+
+      <ul className="grid grid-cols-5 gap-5">
         {items &&
           Object.entries(items.data).map(([key, item]) => (
-            <div key={key}>
-              <img
-                src={`https://ddragon.leagueoflegends.com/cdn/14.24.1/img/item/${item.image.full}`}
-                alt=""
-              />
-              <p>{item.name}</p>
-              <p>{item.plaintext}</p>
-            </div>
+            <CardItem
+              key={key}
+              cardId={null}
+              cardName={item.name}
+              descript={item.plaintext}
+              img={`https://ddragon.leagueoflegends.com/cdn/14.24.1/img/item/${item.image.full}`}
+            />
           ))}
-      </div>
-    </>
+      </ul>
+    </div>
   );
 };
 
