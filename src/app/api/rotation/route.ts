@@ -33,13 +33,20 @@ export const getChampionRotation = async (): Promise<ChampionRotation> => {
   }
 };
 
-// GET 요청에 대한 처리
 export async function GET() {
   try {
     const rotation = await getChampionRotation();
-    return NextResponse.json(rotation); // JSON 형태로 응답
+
+    return NextResponse.json({
+      freeChampionIds: rotation.freeChampionIds,
+      freeChampionIdsForNewPlayers: rotation.freeChampionIdsForNewPlayers,
+      maxNewPlayerLevel: rotation.maxNewPlayerLevel,
+    });
   } catch (error) {
     console.error("Internal Server Error:", error);
-    return NextResponse.json(error);
+    return NextResponse.json(
+      { error: "Internal Server Error" },
+      { status: 500 }
+    );
   }
 }
