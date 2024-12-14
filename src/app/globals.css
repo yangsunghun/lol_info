@@ -6,9 +6,13 @@
   --foreground-rgb: 255, 255, 255;
   --background-start-rgb: 51, 51, 51;
   --background-end-rgb: 255, 255, 255;
+  --header-height: 80px;
 }
 
-@layer components {
+@layer base {
+}
+
+@layer utilities {
   .inner {
     width: 1400px;
   }
@@ -30,7 +34,9 @@
   .m-center {
     margin: 0 auto;
   }
+}
 
+@layer components {
   .page-title {
     margin: 100px 0 50px;
     text-align: center;
@@ -51,6 +57,10 @@
     width: 80px;
     height: 80px;
   }
+
+  .not-found {
+    height: calc(100vh - var(--header-height));
+  }
 }
 
 @media (prefers-color-scheme: dark) {
@@ -66,8 +76,19 @@ body {
   background: rgb(var(--background-start-rgb));
 }
 
+header {
+  height: var(--header-height);
+  position: fixed;
+  left: 0;
+  top: 0;
+}
+
+header .inner {
+  height: inherit;
+}
+
 main {
-  padding-bottom: 100px;
+  padding-top: var(--header-height);
 }
 
 @layer utilities {

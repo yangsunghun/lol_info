@@ -4,7 +4,7 @@ import React from "react";
 const Header = () => {
   return (
     <header className="w-full bg-black">
-      <div className="inner h-20 m-center flex-box items-center">
+      <div className="inner m-center flex-box items-center">
         <h1>
           <Link href="/">홈</Link>
         </h1>
