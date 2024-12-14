@@ -8,7 +8,11 @@ interface CardItemProps {
   img: string;
 }
 
-const CardItem: React.FC<CardItemProps> = ({
+type RequiredCardItemProps = Omit<CardItemProps, "cardId"> & {
+  cardId?: string;
+};
+
+const CardItem: React.FC<RequiredCardItemProps> = ({
   cardId,
   cardName,
   descript,

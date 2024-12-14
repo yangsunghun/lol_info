@@ -24,7 +24,6 @@ const ItemPage = async () => {
           Object.entries(items.data).map(([key, item]) => (
             <CardItem
               key={key}
-              cardId={null}
               cardName={item.name}
               descript={item.plaintext}
               img={`https://ddragon.leagueoflegends.com/cdn/${version}/img/item/${item.image.full}`}
