@@ -6,7 +6,7 @@ export const revalidate = 86400;
 
 const ChampionPage = async () => {
   let champions: ChampionListResponse;
-  const version = await getLatestVersion();
+  const version: string = await getLatestVersion();
 
   try {
     champions = await fetchChampionList();

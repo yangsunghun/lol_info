@@ -2,24 +2,28 @@ import CardItem from "@/components/ui/CardItem";
 import { ItemListResponse } from "@/types/Item";
 import { fetchItemList, getLatestVersion } from "@/utils/serverApi";
 
-export const revalidate = 86400;
-
-const ItemPage = async () => {
-  let items: ItemListResponse;
+async function getItems() {
   const version = await getLatestVersion();
+  let items: ItemListResponse;
 
   try {
     items = await fetchItemList();
   } catch (error) {
     console.error("데이터를 불러올 수 없습니다.", error);
-    return <div>데이터를 불러올 수 없습니다. 불편을 드려 죄송합니다.</div>;
+    throw new Error("데이터를 불러올 수 없습니다.");
   }
+
+  return { items, version };
+}
+
+const ItemPage = async () => {
+  const { items, version } = await getItems();
 
   return (
     <div className="inner m-center">
       <h2 className="page-title">아이템 목록</h2>
 
-      <ul className="grid grid-cols-5 gap-5">
+      <ul className="grid grid-cols-3 gap-5">
         {items &&
           Object.entries(items.data).map(([key, item]) => (
             <CardItem
