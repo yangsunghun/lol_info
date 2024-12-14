@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
@@ -23,7 +24,9 @@ const CardItem: React.FC<RequiredCardItemProps> = ({
       {cardId && (
         <Link href={`/champions/${cardId}`} className="click-box"></Link>
       )}
-      <img src={`${img}`} alt={cardName} />
+      <figure>
+        <Image src={`${img}`} alt={cardName} layout="fill" objectFit="cover" />
+      </figure>
       <p className="mt-3 text-[20px] font-medium">{cardName}</p>
       <p className="font-thin">{descript}</p>
     </li>

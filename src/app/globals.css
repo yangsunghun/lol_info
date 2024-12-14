@@ -46,8 +46,10 @@
     border-radius: 5px;
   }
 
-  .list-item img {
-    display: inline-block;
+  .list-item figure {
+    position: relative;
+    width: 80px;
+    height: 80px;
   }
 }
 
