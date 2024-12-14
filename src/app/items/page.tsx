@@ -1,9 +1,12 @@
 import CardItem from "@/components/ui/CardItem";
 import { ItemListResponse } from "@/types/Item";
-import { fetchItemList } from "@/utils/serverApi";
+import { fetchItemList, getLatestVersion } from "@/utils/serverApi";
+
+export const revalidate = 86400;
 
 const ItemPage = async () => {
   let items: ItemListResponse;
+  const version = await getLatestVersion();
 
   try {
     items = await fetchItemList();
@@ -24,7 +27,7 @@ const ItemPage = async () => {
               cardId={null}
               cardName={item.name}
               descript={item.plaintext}
-              img={`https://ddragon.leagueoflegends.com/cdn/14.24.1/img/item/${item.image.full}`}
+              img={`https://ddragon.leagueoflegends.com/cdn/${version}/img/item/${item.image.full}`}
             />
           ))}
       </ul>

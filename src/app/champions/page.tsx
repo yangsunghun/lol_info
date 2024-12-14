@@ -2,6 +2,8 @@ import { ChampionListResponse } from "@/types/Champion";
 import { fetchChampionList, getLatestVersion } from "@/utils/serverApi";
 import CardItem from "@/components/ui/CardItem";
 
+export const revalidate = 86400;
+
 const ChampionPage = async () => {
   let champions: ChampionListResponse;
   const version = await getLatestVersion();
@@ -18,16 +20,15 @@ const ChampionPage = async () => {
       <h2 className="page-title">챔피언 목록</h2>
 
       <ul className="grid grid-cols-5 gap-5">
-        {champions &&
-          Object.values(champions.data).map((champion) => (
-            <CardItem
-              key={champion.id}
-              cardId={champion.id}
-              cardName={champion.name}
-              descript={champion.title}
-              img={`https://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${champion.image.full}`}
-            />
-          ))}
+        {Object.values(champions.data).map((champion) => (
+          <CardItem
+            key={champion.id}
+            cardId={champion.id}
+            cardName={champion.name}
+            descript={champion.title}
+            img={`https://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${champion.image.full}`}
+          />
+        ))}
       </ul>
     </div>
   );
