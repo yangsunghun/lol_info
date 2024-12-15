@@ -1,80 +1,120 @@
+"use client";
 import { ChampionListResponse } from "@/types/Champion";
-import { ChampionRotation } from "@/types/ChampionRotation";
 import { fetchChampionList, getLatestVersion } from "@/utils/serverApi";
-import { getChampionRotation } from "../api/rotation/route";
+import { useQuery } from "@tanstack/react-query";
 import CardItem from "@/components/ui/CardItem";
+import { ChampionRotation } from "@/types/ChampionRotation";
 
-const Page = async () => {
-  const version = await getLatestVersion();
+const RotationPage = () => {
+  const { data: version, isLoading: versionLoading } = useQuery({
+    queryKey: ["version"],
+    queryFn: getLatestVersion,
+  });
 
-  let champions: ChampionListResponse;
-  let rotation: ChampionRotation;
+  const {
+    data: rotation,
+    isPending: rotaionPending,
+    isError: rotationError,
+  } = useQuery<ChampionRotation>({
+    queryKey: ["championRotation"],
+    queryFn: async () => {
+      const res = await fetch("/api/rotation");
+      if (!res.ok)
+        throw new Error("로테이션 데이터를 가져오는 데 실패했습니다.");
+      return res.json();
+    },
+    retry: false,
+    staleTime: 1000 * 60 * 5,
+  });
 
-  try {
-    champions = await fetchChampionList();
-    rotation = await getChampionRotation();
-  } catch (error) {
-    console.error("서버 상태가 원활하지 않습니다", error);
-    return <div>서버 상태가 원활하지 않습니다. 불편을 드려 죄송합니다.</div>;
+  // 챔피언 목록을 가져오는 쿼리 추가
+  const {
+    data: champions,
+    isPending: championPengding,
+    isError: championsError,
+  } = useQuery<ChampionListResponse>({
+    queryKey: ["championList"],
+    queryFn: fetchChampionList,
+    staleTime: 1000 * 60 * 5,
+  });
+
+  if (rotaionPending || championPengding) {
+    return <div>로딩 중...</div>;
   }
 
-  // 무료 챔피언 목록
-  const freeChampions = rotation.freeChampionIds
-    .map((id) =>
-      Object.values(champions.data).find(
-        (champion) => champion.key === id.toString() // champion의 key는 문자열로 저장된 숫자라서 변환
-      )
-    )
-    .filter(Boolean); // 일치하는 값들만 남기기
+  if (rotationError || championsError) {
+    return <div>에러</div>;
+  }
 
-  // 신규 플레이어를 위한 무료 챔피언 목록
-  const newPlayerChampions = rotation.freeChampionIdsForNewPlayers
+  const { freeChampionIds, freeChampionIdsForNewPlayers } =
+    rotation as ChampionRotation;
+
+  console.log(champions);
+  console.log(freeChampionIds);
+  console.log(freeChampionIdsForNewPlayers);
+
+  // 무료 챔피언 목록
+  const freeChampions = freeChampionIds
     .map((id) =>
-      Object.values(champions.data).find(
-        (champion) => champion.key === id.toString()
-      )
+      champions && champions.data
+        ? Object.values(champions.data).find(
+            (champion) => champion.key === id.toString()
+          )
+        : null
     )
     .filter(Boolean);
 
-  // console.log(freeChampions);
-  // console.log(newPlayerChampions);
+  // 신규 플레이어를 위한 무료 챔피언 목록
+  const newPlayerChampions = freeChampionIdsForNewPlayers
+    .map((id) =>
+      champions && champions.data
+        ? Object.values(champions.data).find(
+            (champion) => champion.key === id.toString()
+          )
+        : null
+    )
+    .filter(Boolean);
 
   return (
     <div className="inner m-center">
       <h2 className="page-title">무료 챔피언 목록</h2>
-
       <ul className="grid grid-cols-5 gap-5">
-        {freeChampions.map(
-          (champion) =>
-            champion && (
-              <CardItem
-                key={champion.id}
-                cardId={champion.id}
-                cardName={champion.name}
-                descript={champion.title}
-                img={`https://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${champion.image.full}`}
-              />
-            )
+        {Array.isArray(freeChampions) && freeChampions.length > 0 ? (
+          freeChampions.map(
+            (champion) =>
+              champion && (
+                <CardItem
+                  key={champion.key}
+                  cardId={champion.id}
+                  cardName={champion.name}
+                  descript={champion.title}
+                  img={`https://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${champion.image.full}`}
+                />
+              )
+          )
+        ) : (
+          <div>무료 챔피언이 없습니다.</div> // 배열이 없거나 비어 있을 때 보여줄 메시지
         )}
       </ul>
 
       <h2 className="page-title">신규 플레이어를 위한 무료 챔피언 목록</h2>
       <ul className="grid grid-cols-5 gap-5">
-        {newPlayerChampions.map(
-          (champion) =>
-            champion && (
-              <CardItem
-                key={champion.id}
-                cardId={champion.id}
-                cardName={champion.name}
-                descript={champion.title}
-                img={`https://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${champion.image.full}`}
-              />
-            )
-        )}
+        {newPlayerChampions &&
+          newPlayerChampions.map(
+            (champion) =>
+              champion && (
+                <CardItem
+                  key={champion.key}
+                  cardId={champion.id}
+                  cardName={champion.name}
+                  descript={champion.title}
+                  img={`https://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${champion.image.full}`}
+                />
+              )
+          )}
       </ul>
     </div>
   );
 };
 
-export default Page;
+export default RotationPage;

@@ -25,7 +25,7 @@ const CardItem: React.FC<RequiredCardItemProps> = ({
         <Link href={`/champions/${cardId}`} className="click-box"></Link>
       )}
       <figure>
-        <Image src={`${img}`} alt={cardName} layout="fill" objectFit="cover" />
+        <Image src={`${img}`} alt={cardName} fill objectFit="cover" />
       </figure>
       <p className="mt-3 text-[20px] font-medium">{cardName}</p>
       <p className="font-thin">{descript}</p>

@@ -1,7 +1,7 @@
 import { ChampionRotation } from "@/types/ChampionRotation";
 import { NextResponse } from "next/server";
 
-const API_KEY: string | undefined = process.env.RIOT_API_KEY;
+const API_KEY: string | undefined = process.env.NEXT_PUBLIC_RIOT_API_KEY;
 
 if (!API_KEY) {
   throw new Error("API 요청 중 에러가 발생: API 키가 없습니다.");
