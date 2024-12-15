@@ -1,8 +1,19 @@
 import { ChampionListResponse } from "@/types/Champion";
 import { fetchChampionList, getLatestVersion } from "@/utils/serverApi";
 import CardItem from "@/components/ui/CardItem";
+import { Metadata } from "next";
 
 export const revalidate = 86400;
+
+export const metadata: Metadata = {
+  title: "LOL Info: 챔피언 목록",
+  description: "리그 오브 레전드 챔피언 목록 페이지",
+  openGraph: {
+    title: "LOL Info: 챔피언 목록",
+    description: "리그 오브 레전드 챔피언 목록 페이지",
+    url: "http://localhost:3000/champions",
+  },
+};
 
 const ChampionPage = async () => {
   let champions: ChampionListResponse;
@@ -19,7 +30,7 @@ const ChampionPage = async () => {
     <div className="inner m-center">
       <h2 className="page-title">챔피언 목록</h2>
 
-      <ul className="grid grid-cols-5 gap-5">
+      <ul className="grid grid-cols-4 gap-5">
         {Object.values(champions.data).map((champion) => (
           <CardItem
             key={champion.id}

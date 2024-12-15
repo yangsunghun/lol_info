@@ -4,9 +4,20 @@ import { fetchChampionList, getLatestVersion } from "@/utils/serverApi";
 import { useQuery } from "@tanstack/react-query";
 import CardItem from "@/components/ui/CardItem";
 import { ChampionRotation } from "@/types/ChampionRotation";
+import { Metadata } from "next";
+
+// export const metadata: Metadata = {
+//   title: "LOL Info: 이번주 로테이션",
+//   description: "리그 오브 레전드 이번주 로테이션을 확인하세요.",
+//   openGraph: {
+//     title: "LOL Info: 이번주 로테이션",
+//     description: "리그 오브 레전드 게임 이번주 로테이션",
+//     url: "http://localhost:3000/rotation",
+//   },
+// };
 
 const RotationPage = () => {
-  const { data: version, isLoading: versionLoading } = useQuery({
+  const { data: version } = useQuery({
     queryKey: ["version"],
     queryFn: getLatestVersion,
   });
@@ -27,10 +38,9 @@ const RotationPage = () => {
     staleTime: 1000 * 60 * 5,
   });
 
-  // 챔피언 목록을 가져오는 쿼리 추가
   const {
     data: champions,
-    isPending: championPengding,
+    isPending: championPending,
     isError: championsError,
   } = useQuery<ChampionListResponse>({
     queryKey: ["championList"],
@@ -38,7 +48,7 @@ const RotationPage = () => {
     staleTime: 1000 * 60 * 5,
   });
 
-  if (rotaionPending || championPengding) {
+  if (rotaionPending || championPending) {
     return <div>로딩 중...</div>;
   }
 
@@ -48,10 +58,6 @@ const RotationPage = () => {
 
   const { freeChampionIds, freeChampionIdsForNewPlayers } =
     rotation as ChampionRotation;
-
-  console.log(champions);
-  console.log(freeChampionIds);
-  console.log(freeChampionIdsForNewPlayers);
 
   // 무료 챔피언 목록
   const freeChampions = freeChampionIds

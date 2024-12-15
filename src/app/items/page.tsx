@@ -1,6 +1,17 @@
 import CardItem from "@/components/ui/CardItem";
 import { ItemListResponse } from "@/types/Item";
 import { fetchItemList, getLatestVersion } from "@/utils/serverApi";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "LOL Info: 아이템 목록",
+  description: "리그 오브 레전드 아이템 목록 페이지",
+  openGraph: {
+    title: "LOL Info: 아이템 목록",
+    description: "리그 오브 레전드 아이템 목록 페이지",
+    url: "http://localhost:3000/items",
+  },
+};
 
 async function getItems() {
   const version = await getLatestVersion();
