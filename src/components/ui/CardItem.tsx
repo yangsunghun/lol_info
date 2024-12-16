@@ -33,11 +33,16 @@ const CardItem: React.FC<RequiredCardItemProps> = ({
         <Link href={`/champions/${cardId}`} className="click-box"></Link>
       )}
       <figure>
-        <Image src={`${img}`} alt={cardName} fill objectFit="cover" />
+        <Image
+          src={`${img}`}
+          alt={cardName}
+          fill={true}
+          sizes="(max-width: 768px) 100%"
+        />
       </figure>
       <div>
         <p className="text-[20px] font-medium">{cleanDescription(cardName)}</p>
-        <p className="mt-1 font-thin">
+        <p className="mt-1 font-light">
           {descript ? cleanDescription(descript) : `설명이 없습니다.`}
         </p>
       </div>

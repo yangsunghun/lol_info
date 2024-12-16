@@ -1,6 +1,6 @@
 "use client";
 import { ChampionListResponse } from "@/types/Champion";
-import { fetchChampionList, getLatestVersion } from "@/utils/serverApi";
+import { fetchChampionList, getLatestVersion } from "@/api/serverApi";
 import { useQuery } from "@tanstack/react-query";
 import CardItem from "@/components/ui/CardItem";
 import { ChampionRotation } from "@/types/ChampionRotation";
@@ -84,7 +84,7 @@ const RotationPage = () => {
   return (
     <div className="inner m-center">
       <h2 className="page-title">무료 챔피언 목록</h2>
-      <ul className="grid grid-cols-5 gap-5">
+      <ul className="grid grid-cols-4 gap-5">
         {Array.isArray(freeChampions) && freeChampions.length > 0 ? (
           freeChampions.map(
             (champion) =>
@@ -104,7 +104,7 @@ const RotationPage = () => {
       </ul>
 
       <h2 className="page-title">신규 플레이어를 위한 무료 챔피언 목록</h2>
-      <ul className="grid grid-cols-5 gap-5">
+      <ul className="grid grid-cols-4 gap-5">
         {newPlayerChampions &&
           newPlayerChampions.map(
             (champion) =>

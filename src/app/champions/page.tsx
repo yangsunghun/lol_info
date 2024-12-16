@@ -1,5 +1,5 @@
 import { ChampionListResponse } from "@/types/Champion";
-import { fetchChampionList, getLatestVersion } from "@/utils/serverApi";
+import { fetchChampionList, getLatestVersion } from "@/api/serverApi";
 import CardItem from "@/components/ui/CardItem";
 import { Metadata } from "next";
 

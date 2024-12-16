@@ -1,5 +1,5 @@
 import { Champion } from "@/types/Champion";
-import { fetchChampionDetail, getLatestVersion } from "@/utils/serverApi";
+import { fetchChampionDetail, getLatestVersion } from "@/api/serverApi";
 
 interface Props {
   params: {

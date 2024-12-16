@@ -2,13 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 255, 255, 255;
-  --background-start-rgb: 51, 51, 51;
-  --background-end-rgb: 255, 255, 255;
-  --header-height: 80px;
-}
-
 @layer base {
 }
 
@@ -47,8 +40,8 @@
   .card-item {
     position: relative;
     padding: 20px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(var(--foreground-rgb), 0.1);
+    background: rgba(var(--foreground-rgb), 0.03);
     border-radius: 5px;
   }
 
@@ -56,6 +49,10 @@
     position: relative;
     width: 80px;
     height: 80px;
+  }
+
+  .card-item > figure img {
+    object-fit: cover;
   }
 
   .card-item > div {
@@ -67,17 +64,29 @@
   }
 }
 
+:root {
+  --foreground-rgb: 21, 21, 21;
+  --background-rgb: 255, 255, 255;
+  --header-height: 80px;
+}
+
 @media (prefers-color-scheme: dark) {
   :root {
     --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
+    --background-rgb: 21, 21, 21;
     --background-end-rgb: 0, 0, 0;
   }
 }
 
+.dark {
+  --foreground-rgb: 255, 255, 255;
+  --background-rgb: 21, 21, 21;
+  --background-end-rgb: 0, 0, 0;
+}
+
 body {
   color: rgb(var(--foreground-rgb));
-  background: rgb(var(--background-start-rgb));
+  background: rgb(var(--background-rgb));
 }
 
 header {
@@ -86,6 +95,8 @@ header {
   left: 0;
   top: 0;
   z-index: 99;
+  background: rgb(var(--background-rgb));
+  border-bottom: 1px solid rgba(var(--foreground-rgb), 0.1);
 }
 
 header .inner {

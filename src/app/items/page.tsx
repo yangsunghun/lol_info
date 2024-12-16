@@ -1,6 +1,6 @@
 import CardItem from "@/components/ui/CardItem";
 import { ItemListResponse } from "@/types/Item";
-import { fetchItemList, getLatestVersion } from "@/utils/serverApi";
+import { fetchItemList, getLatestVersion } from "@/api/serverApi";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -13,7 +13,7 @@ export const metadata: Metadata = {
   },
 };
 
-async function getItems() {
+const ItemPage = async () => {
   const version = await getLatestVersion();
   let items: ItemListResponse;
 
@@ -21,14 +21,8 @@ async function getItems() {
     items = await fetchItemList();
   } catch (error) {
     console.error("데이터를 불러올 수 없습니다.", error);
-    throw new Error("데이터를 불러올 수 없습니다.");
+    return <div>데이터를 불러올 수 없습니다. 불편을 드려 죄송합니다.</div>;
   }
-
-  return { items, version };
-}
-
-const ItemPage = async () => {
-  const { items, version } = await getItems();
 
   return (
     <div className="inner m-center">
