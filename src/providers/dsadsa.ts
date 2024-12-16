@@ -306,3 +306,140 @@
     },
   },
 ];
+
+
+
+
+[
+    {
+        "dataName": "1001",
+        "dataInfo": {
+            "name": "장화",
+            "description": "<mainText><stats>이동 속도 <attention>25</attention></stats><br><br></mainText>",
+            "colloq": ";똥신;boots;speed",
+            "plaintext": "이동 속도가 약간 증가합니다.",
+            "into": [
+                "3005",
+                "3047",
+                "3006",
+                "3009",
+                "3010",
+                "3020",
+                "3111",
+                "3117",
+                "3158"
+            ],
+            "image": {
+                "full": "1001.png",
+                "sprite": "item0.png",
+                "group": "item",
+                "x": 0,
+                "y": 0,
+                "w": 48,
+                "h": 48
+            },
+            "gold": {
+                "base": 300,
+                "purchasable": true,
+                "total": 300,
+                "sell": 210
+            },
+            "tags": [
+                "Boots"
+            ],
+            "maps": {
+                "11": true,
+                "12": true,
+                "21": true,
+                "22": false,
+                "30": false,
+                "33": false
+            },
+            "stats": {
+                "FlatMovementSpeedMod": 25
+            }
+        }
+    },
+    {
+        "dataName": "1004",
+        "dataInfo": {
+            "name": "요정의 부적",
+            "description": "<mainText><stats>기본 마나 재생 <attention>50%</attention></stats><br><br></mainText>",
+            "colloq": ";요부;faerie;charm",
+            "plaintext": "마나 재생량이 약간 증가합니다.",
+            "into": [
+                "3114",
+                "4642",
+                "3012"
+            ],
+            "image": {
+                "full": "1004.png",
+                "sprite": "item0.png",
+                "group": "item",
+                "x": 48,
+                "y": 0,
+                "w": 48,
+                "h": 48
+            },
+            "gold": {
+                "base": 200,
+                "purchasable": true,
+                "total": 200,
+                "sell": 140
+            },
+            "tags": [
+                "ManaRegen"
+            ],
+            "maps": {
+                "11": true,
+                "12": true,
+                "21": true,
+                "22": false,
+                "30": false,
+                "33": false
+            },
+            "stats": {}
+        }
+    },
+    {
+        "dataName": "1006",
+        "dataInfo": {
+            "name": "원기 회복의 구슬",
+            "description": "<mainText><stats>기본 체력 재생 <attention>100%</attention></stats><br><br></mainText>",
+            "colloq": ";완두콩;rejuvenation;bead",
+            "plaintext": "체력 재생량이 약간 증가합니다.",
+            "into": [
+                "3109",
+                "3211",
+                "3801"
+            ],
+            "image": {
+                "full": "1006.png",
+                "sprite": "item0.png",
+                "group": "item",
+                "x": 96,
+                "y": 0,
+                "w": 48,
+                "h": 48
+            },
+            "gold": {
+                "base": 300,
+                "purchasable": true,
+                "total": 300,
+                "sell": 120
+            },
+            "tags": [
+                "HealthRegen"
+            ],
+            "maps": {
+                "11": true,
+                "12": true,
+                "21": true,
+                "22": false,
+                "30": false,
+                "33": false
+            },
+            "stats": {}
+        }
+    },
+]

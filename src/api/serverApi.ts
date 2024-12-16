@@ -1,9 +1,5 @@
-import {
-  Champion,
-  ChampionListArray,
-  ChampionListResponse,
-} from "@/types/Champion";
-import { ItemListArray, ItemListResponse } from "@/types/Item";
+import { Champion, ChampionList, ChampionListResponse } from "@/types/Champion";
+import { RefinedItemData, ItemList, ItemListResponse } from "@/types/Item";
 
 // 최신 버전을 가져오는 함수
 export const getLatestVersion = async (): Promise<string> => {
@@ -18,7 +14,7 @@ export const getLatestVersion = async (): Promise<string> => {
 };
 
 // 모든 챔피언 목록을 가져오는 함수
-export const fetchChampionList = async (): Promise<ChampionListArray[]> => {
+export const fetchChampionList = async (): Promise<ChampionList[]> => {
   try {
     const version = await getLatestVersion();
     const response = await fetch(
@@ -33,7 +29,7 @@ export const fetchChampionList = async (): Promise<ChampionListArray[]> => {
 
     //return data;
 
-    const refinedData: ChampionListArray[] = [];
+    const refinedData: ChampionList[] = [];
 
     for (const [key, value] of Object.entries(data.data)) {
       refinedData.push({ dataName: key, dataInfo: value });
@@ -67,7 +63,7 @@ export const fetchChampionDetail = async (id: string): Promise<Champion> => {
 };
 
 // 아이템 목록을 가져오는 함수
-export const fetchItemList = async (): Promise<ItemListArray[]> => {
+export const fetchItemList = async (): Promise<RefinedItemData> => {
   try {
     const version = await getLatestVersion();
     const response = await fetch(
@@ -81,12 +77,12 @@ export const fetchItemList = async (): Promise<ItemListArray[]> => {
     const data: ItemListResponse = await response.json();
     // return data;
 
-    const refinedData: ItemListArray[] = [];
+    const refinedData: ItemList[] = [];
 
     for (const [key, value] of Object.entries(data.data)) {
       refinedData.push({ dataName: key, dataInfo: value });
     }
-    return refinedData;
+    return { refinedData, version: data.version };
   } catch (error) {
     console.error("목록을 불러오는데에 실패했습니다.", error);
     throw error;

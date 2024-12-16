@@ -1,6 +1,5 @@
-import { ChampionListArray, ChampionListResponse } from "@/types/Champion";
+import { ChampionList, ChampionListResponse } from "@/types/Champion";
 import { fetchChampionList, getLatestVersion } from "@/api/serverApi";
-import CardItem from "@/components/ui/CardItem";
 import { Metadata } from "next";
 import CardList from "@/components/ui/CardList";
 
@@ -17,10 +16,16 @@ export const metadata: Metadata = {
 };
 //npx
 const ChampionPage = async () => {
-  let champions: ChampionListArray[];
+  let champions: ChampionList[];
+  let version: string;
 
   try {
     champions = await fetchChampionList();
+    version = champions[0].dataInfo.version;
+    /*
+    각자 version 전달이 뭔가 좋지 않아보임
+    리팩토링
+    */
   } catch (error) {
     console.error("서버 상태가 원활하지 않습니다", error);
     return <div>서버 상태가 원활하지 않습니다. 불편을 드려 죄송합니다.</div>;
@@ -30,7 +35,7 @@ const ChampionPage = async () => {
     <div className="inner m-center">
       <h2 className="page-title">챔피언 목록</h2>
 
-      <CardList listData={champions} mode="champion" />
+      <CardList listData={champions} mode="champion" version={version} />
     </div>
   );
 };

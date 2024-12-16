@@ -1,4 +1,4 @@
-export interface ChampionListArray {
+export interface ChampionList {
   dataName: string;
   dataInfo: Champion;
 }
@@ -11,6 +11,7 @@ export interface ChampionListResponse {
 }
 
 export interface Champion {
+  version: string;
   id: string; // 챔피언 ID
   key: string; // 챔피언 키
   name: string; // 챔피언 이름

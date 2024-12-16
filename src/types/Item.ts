@@ -1,13 +1,18 @@
-export interface ItemListArray {
-  dataName: string;
-  dataInfo: Item;
-}
-
 export interface ItemListResponse {
   type: string; // 응답 타입
   format: string; // 데이터 형식
   version: string; // API 버전
   data: { [key: string]: Item }; // 아이템 ID를 키로 하는 아이템 객체의 맵
+}
+
+export interface ItemList {
+  dataName: string;
+  dataInfo: Item;
+}
+
+export interface RefinedItemData {
+  refinedData: ItemList[];
+  version: string;
 }
 
 export interface Item {
