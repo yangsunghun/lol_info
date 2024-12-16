@@ -1,3 +1,8 @@
+export interface ItemListArray {
+  dataName: string;
+  dataInfo: Item;
+}
+
 export interface ItemListResponse {
   type: string; // 응답 타입
   format: string; // 데이터 형식

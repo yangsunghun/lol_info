@@ -1,3 +1,8 @@
+export interface ChampionListArray {
+  dataName: string;
+  dataInfo: Champion;
+}
+
 export interface ChampionListResponse {
   type: string; // 응답 타입
   format: string; // 데이터 형식

@@ -1,5 +1,9 @@
-import { Champion, ChampionListResponse } from "@/types/Champion";
-import { ItemListResponse } from "@/types/Item";
+import {
+  Champion,
+  ChampionListArray,
+  ChampionListResponse,
+} from "@/types/Champion";
+import { ItemListArray, ItemListResponse } from "@/types/Item";
 
 // 최신 버전을 가져오는 함수
 export const getLatestVersion = async (): Promise<string> => {
@@ -14,7 +18,7 @@ export const getLatestVersion = async (): Promise<string> => {
 };
 
 // 모든 챔피언 목록을 가져오는 함수
-export const fetchChampionList = async (): Promise<ChampionListResponse> => {
+export const fetchChampionList = async (): Promise<ChampionListArray[]> => {
   try {
     const version = await getLatestVersion();
     const response = await fetch(
@@ -26,7 +30,15 @@ export const fetchChampionList = async (): Promise<ChampionListResponse> => {
     }
 
     const data: ChampionListResponse = await response.json();
-    return data;
+
+    //return data;
+
+    const refinedData: ChampionListArray[] = [];
+
+    for (const [key, value] of Object.entries(data.data)) {
+      refinedData.push({ dataName: key, dataInfo: value });
+    }
+    return refinedData;
   } catch (error) {
     console.error("챔피언 목록을 불러오는데에 실패했습니다.", error);
     throw error;
@@ -55,7 +67,7 @@ export const fetchChampionDetail = async (id: string): Promise<Champion> => {
 };
 
 // 아이템 목록을 가져오는 함수
-export const fetchItemList = async (): Promise<ItemListResponse> => {
+export const fetchItemList = async (): Promise<ItemListArray[]> => {
   try {
     const version = await getLatestVersion();
     const response = await fetch(
@@ -66,8 +78,15 @@ export const fetchItemList = async (): Promise<ItemListResponse> => {
       throw new Error("목록을 불러오는데에 실패했습니다.");
     }
 
-    const data = await response.json();
-    return data;
+    const data: ItemListResponse = await response.json();
+    // return data;
+
+    const refinedData: ItemListArray[] = [];
+
+    for (const [key, value] of Object.entries(data.data)) {
+      refinedData.push({ dataName: key, dataInfo: value });
+    }
+    return refinedData;
   } catch (error) {
     console.error("목록을 불러오는데에 실패했습니다.", error);
     throw error;

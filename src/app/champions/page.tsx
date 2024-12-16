@@ -1,7 +1,8 @@
-import { ChampionListResponse } from "@/types/Champion";
+import { ChampionListArray, ChampionListResponse } from "@/types/Champion";
 import { fetchChampionList, getLatestVersion } from "@/api/serverApi";
 import CardItem from "@/components/ui/CardItem";
 import { Metadata } from "next";
+import CardList from "@/components/ui/CardList";
 
 export const revalidate = 86400;
 
@@ -14,10 +15,9 @@ export const metadata: Metadata = {
     url: "http://localhost:3000/champions",
   },
 };
-
+//npx
 const ChampionPage = async () => {
-  let champions: ChampionListResponse;
-  const version: string = await getLatestVersion();
+  let champions: ChampionListArray[];
 
   try {
     champions = await fetchChampionList();
@@ -30,17 +30,7 @@ const ChampionPage = async () => {
     <div className="inner m-center">
       <h2 className="page-title">챔피언 목록</h2>
 
-      <ul className="grid grid-cols-4 gap-5">
-        {Object.values(champions.data).map((champion) => (
-          <CardItem
-            key={champion.id}
-            cardId={champion.id}
-            cardName={champion.name}
-            descript={champion.title}
-            img={`https://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${champion.image.full}`}
-          />
-        ))}
-      </ul>
+      <CardList listData={champions} mode="champion" />
     </div>
   );
 };

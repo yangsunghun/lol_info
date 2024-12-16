@@ -1,15 +1,35 @@
 import { Champion } from "@/types/Champion";
 import { fetchChampionDetail, getLatestVersion } from "@/api/serverApi";
+import { Metadata } from "next";
 
 interface Props {
   params: {
-    detail: string; // URL에서 가져오는 챔피언 ID
+    detail: string;
   };
 }
 
 const getChampionData = async (id: string): Promise<Champion> => {
   return await fetchChampionDetail(id);
 };
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const championId = params.detail;
+
+  const { detail } = params;
+
+  // 챔피언 데이터 가져오기
+  const champion = await getChampionData(detail);
+
+  return {
+    title: `LOL Info: 챔피언 ${champion.name} 정보`,
+    description: `${championId}의 자세한 정보`,
+    openGraph: {
+      title: `LOL Info: ${championId} 챔피언 정보`,
+      description: `리그 오브 레전드 챔피언 ${championId}의 자세한 정보를 확인하세요.`,
+      url: `http://localhost:3000/champions/${championId}`,
+    },
+  };
+}
 
 const ChampionDetailPage = async ({ params }: Props) => {
   const { detail } = params;
@@ -19,7 +39,7 @@ const ChampionDetailPage = async ({ params }: Props) => {
   const version = await getLatestVersion();
 
   return (
-    <div>
+    <div className="inner m-center">
       <h1>{champion.name}</h1>
       <h2>{champion.title}</h2>
       <img

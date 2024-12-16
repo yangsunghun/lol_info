@@ -1,7 +1,8 @@
 import CardItem from "@/components/ui/CardItem";
-import { ItemListResponse } from "@/types/Item";
+import { ItemListArray, ItemListResponse } from "@/types/Item";
 import { fetchItemList, getLatestVersion } from "@/api/serverApi";
 import { Metadata } from "next";
+import CardList from "@/components/ui/CardList";
 
 export const metadata: Metadata = {
   title: "LOL Info: 아이템 목록",
@@ -14,8 +15,7 @@ export const metadata: Metadata = {
 };
 
 const ItemPage = async () => {
-  const version = await getLatestVersion();
-  let items: ItemListResponse;
+  let items: ItemListArray[];
 
   try {
     items = await fetchItemList();
@@ -28,17 +28,7 @@ const ItemPage = async () => {
     <div className="inner m-center">
       <h2 className="page-title">아이템 목록</h2>
 
-      <ul className="grid grid-cols-3 gap-5">
-        {items &&
-          Object.entries(items.data).map(([key, item]) => (
-            <CardItem
-              key={key}
-              cardName={item.name}
-              descript={item.plaintext}
-              img={`https://ddragon.leagueoflegends.com/cdn/${version}/img/item/${item.image.full}`}
-            />
-          ))}
-      </ul>
+      <CardList listData={items} mode="item"/>
     </div>
   );
 };

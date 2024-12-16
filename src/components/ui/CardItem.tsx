@@ -3,15 +3,11 @@ import Link from "next/link";
 import React from "react";
 
 interface CardItemProps {
-  cardId: string | null;
-  cardName: string;
-  descript: string;
-  img: string;
+  cardId: string;
+  cardName?: string;
+  descript?: string;
+  img?: string;
 }
-
-type RequiredCardItemProps = Omit<CardItemProps, "cardId"> & {
-  cardId?: string;
-};
 
 function cleanDescription(description: string) {
   return description
@@ -21,7 +17,7 @@ function cleanDescription(description: string) {
     .trim(); // 문자열 앞뒤 공백 제거
 }
 
-const CardItem: React.FC<RequiredCardItemProps> = ({
+const CardItem: React.FC<CardItemProps> = ({
   cardId,
   cardName,
   descript,
