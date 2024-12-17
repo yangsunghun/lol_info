@@ -54,6 +54,7 @@ export interface ChampionPassive {
 }
 
 export interface ChampionSpell {
+  key: string;
   id: string; // 스펠 ID
   name: string; // 스펠 이름
   description: string; // 스펠 설명

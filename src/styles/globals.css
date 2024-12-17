@@ -28,6 +28,15 @@
   .m-center {
     margin: 0 auto;
   }
+
+  .bg {
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: -1;
+    width: 100vw;
+    opacity: 0.3;
+  }
 }
 
 @layer components {
@@ -61,6 +70,25 @@
 
   .not-found {
     height: calc(100vh - var(--header-height));
+  }
+
+  .champ-image {
+    position: relative;
+    width: 300px;
+    aspect-ratio: 1/1.8;
+    background-repeat: no-repeat;
+    background-size: 108%;
+    background-position: left 40% top 20%;
+    border-radius: 10px;
+  }
+
+  .champ-info {
+    width: calc(100% - 350px);
+    padding-top: 30px;
+  }
+
+  .skills > li {
+    position: relative;
   }
 }
 
