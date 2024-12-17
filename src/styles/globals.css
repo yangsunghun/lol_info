@@ -216,6 +216,11 @@
   }
   .stats-bar .bar {
     position: relative;
+    width: calc(100% - 55px);
+  }
+  .stats-bar .bar-fill {
+    position: relative;
+    height: 100%;
     background: #fff;
   }
 
@@ -233,6 +238,18 @@
       transparent
     );
   } */
+
+  .slide-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%) scale(1.5);
+  }
+  .slide-arrow.prev {
+    left: -3%;
+  }
+  .slide-arrow.next {
+    right: -3%;
+  }
 }
 
 :root {

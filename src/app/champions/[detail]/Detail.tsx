@@ -111,48 +111,56 @@ const Detail = ({ champion, version }: Props) => {
                 <ul className="stats-bar">
                   <li>
                     <b>생명력</b>
-                    <div
-                      className="bar"
-                      style={{
-                        width: `${champion.info?.defense}0%`,
-                        backgroundColor: "#5edc01",
-                      }}
-                      title={`${champion.info?.defense}`}
-                    ></div>
+                    <div className="bar">
+                      <div
+                        className="bar-fill"
+                        style={{
+                          width: `${champion.info?.defense}0%`,
+                          backgroundColor: "#5edc01",
+                        }}
+                        title={`${champion.info?.defense}`}
+                      ></div>
+                    </div>
                   </li>
                   <li>
                     <b>공격력</b>
-                    <div
-                      className="bar"
-                      style={{
-                        width: `${champion.info?.attack}0%`,
-                        backgroundColor: "#ef2401",
-                      }}
-                      title={`${champion.info?.attack}`}
-                    ></div>
+                    <div className="bar">
+                      <div
+                        className="bar-fill"
+                        style={{
+                          width: `${champion.info?.attack}0%`,
+                          backgroundColor: "#ef2401",
+                        }}
+                        title={`${champion.info?.attack}`}
+                      ></div>
+                    </div>
                   </li>
 
                   <li>
                     <b>주문력</b>
-                    <div
-                      className="bar"
-                      style={{
-                        width: `${champion.info?.magic}0%`,
-                        backgroundColor: "#02a2ff",
-                      }}
-                      title={`${champion.info?.magic}`}
-                    ></div>
+                    <div className="bar">
+                      <div
+                        className="bar-fill"
+                        style={{
+                          width: `${champion.info?.magic}0%`,
+                          backgroundColor: "#02a2ff",
+                        }}
+                        title={`${champion.info?.magic}`}
+                      ></div>
+                    </div>
                   </li>
                   <li>
                     <b>난이도</b>
-                    <div
-                      className="bar"
-                      style={{
-                        width: `${champion.info?.difficulty}0%`,
-                        backgroundColor: "#a800ff",
-                      }}
-                      title={`${champion.info?.difficulty}`}
-                    ></div>
+                    <div className="bar">
+                      <div
+                        className="bar-fill"
+                        style={{
+                          width: `${champion.info?.difficulty}0%`,
+                          backgroundColor: "#a800ff",
+                        }}
+                        title={`${champion.info?.difficulty}`}
+                      ></div>
+                    </div>
                   </li>
                 </ul>
               </article>

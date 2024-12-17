@@ -25,7 +25,7 @@ export default function GlobalError({ error, reset }: Props) {
 
   return (
     <section className="not-found flex items-center justify-center">
-      <div className="text-center">
+      <div className="inner text-center">
         <p className="text-[30px]">예기치 않은 오류가 발생했습니다</p>
         <p className="mt-5">에러 내용: {error.message}</p>
         <div className="mt-6 flex justify-center gap-5">
