@@ -14,22 +14,12 @@ export const metadata: Metadata = {
     url: "http://localhost:3000/champions",
   },
 };
-//npx
-const ChampionPage = async () => {
-  let champions: ChampionList[];
-  let version: string;
 
-  try {
-    champions = await fetchChampionList();
-    version = champions[0].dataInfo.version;
-    /*
-    각자 version 전달이 뭔가 좋지 않아보임
-    리팩토링
-    */
-  } catch (error) {
-    console.error("서버 상태가 원활하지 않습니다", error);
-    return <div>서버 상태가 원활하지 않습니다. 불편을 드려 죄송합니다.</div>;
-  }
+const ChampionPage = async () => {
+  const [champions, version] = await Promise.all([
+    fetchChampionList(),
+    getLatestVersion(),
+  ]);
 
   return (
     <div className="inner m-center">

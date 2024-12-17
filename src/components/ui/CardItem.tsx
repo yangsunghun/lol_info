@@ -3,10 +3,10 @@ import Link from "next/link";
 import React from "react";
 
 interface CardItemProps {
-  cardId: string;
-  cardName?: string;
-  descript?: string;
-  img?: string;
+  cardId?: string;
+  cardName: string;
+  descript: string;
+  img: string;
 }
 
 function cleanDescription(description: string) {

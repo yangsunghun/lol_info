@@ -4,12 +4,12 @@ import { ChampionList } from "@/types/Champion";
 import { ItemList } from "@/types/Item";
 import React, { useEffect, useState } from "react";
 import CardItem from "./CardItem";
-import { getLatestVersion } from "@/api/serverApi";
+import { apiURL } from "@/api/constants";
 
 interface CardListProps {
   listData: ChampionList[] | ItemList[]; // 이게 좀 대충한것 같음
   mode: string;
-  version: string;
+  version: string | undefined;
 }
 /*
 리팩토링 방향
@@ -18,7 +18,7 @@ as는 사용하지 말고 listData 부분을 리팩토링 해볼것
 
 */
 
-const CardList: React.FC<CardListProps> = ({ listData, mode, version }) => {
+const CardList: React.FC<CardListProps> = ({ listData, version, mode }) => {
   return (
     <ul className="grid grid-cols-4 gap-5">
       {listData && version && mode === "champion"
@@ -29,7 +29,7 @@ const CardList: React.FC<CardListProps> = ({ listData, mode, version }) => {
                 cardId={item.dataName}
                 cardName={item.dataInfo.name}
                 descript={item.dataInfo.title}
-                img={`https://ddragon.leagueoflegends.com/cdn/${item.dataInfo.version}/img/champion/${item.dataName}.png`}
+                img={`${apiURL}/cdn/${version}/img/${mode}/${item.dataName}.png`}
               />
             );
           })
@@ -37,10 +37,9 @@ const CardList: React.FC<CardListProps> = ({ listData, mode, version }) => {
             return (
               <CardItem
                 key={item.dataName}
-                cardId={item.dataName}
                 cardName={item.dataInfo.name}
                 descript={item.dataInfo.plaintext}
-                img={`https://ddragon.leagueoflegends.com/cdn/${version}/img/item/${item.dataName}.png`}
+                img={`${apiURL}/cdn/${version}/img/${mode}/${item.dataName}.png`}
               />
             );
           })}

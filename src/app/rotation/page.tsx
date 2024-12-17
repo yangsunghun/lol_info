@@ -1,10 +1,11 @@
 "use client";
-import { ChampionListResponse } from "@/types/Champion";
+import { ChampionList, ChampionListResponse } from "@/types/Champion";
 import { fetchChampionList, getLatestVersion } from "@/api/serverApi";
 import { useQuery } from "@tanstack/react-query";
 import CardItem from "@/components/ui/CardItem";
 import { ChampionRotation } from "@/types/ChampionRotation";
 import { Metadata } from "next";
+import CardList from "@/components/ui/CardList";
 
 // export const metadata: Metadata = {
 //   title: "LOL Info: 이번주 로테이션",
@@ -17,7 +18,7 @@ import { Metadata } from "next";
 // };
 
 const RotationPage = () => {
-  const { data: version } = useQuery({
+  const { data: latestVersion } = useQuery<string>({
     queryKey: ["version"],
     queryFn: getLatestVersion,
   });
@@ -42,7 +43,7 @@ const RotationPage = () => {
     data: champions,
     isPending: championPending,
     isError: championsError,
-  } = useQuery<ChampionListResponse>({
+  } = useQuery<ChampionList[]>({
     queryKey: ["championList"],
     queryFn: fetchChampionList,
     staleTime: 1000 * 60 * 5,
@@ -60,65 +61,38 @@ const RotationPage = () => {
     rotation as ChampionRotation;
 
   // 무료 챔피언 목록
-  const freeChampions = freeChampionIds
+  const freeChampions = (freeChampionIds || [])
     .map((id) =>
-      champions && champions.data
-        ? Object.values(champions.data).find(
-            (champion) => champion.key === id.toString()
-          )
-        : null
+      champions.find((champion) => champion.dataInfo.key === id.toString())
     )
-    .filter(Boolean);
+    .filter((champion): champion is ChampionList => champion !== undefined);
+
+  console.log(freeChampions);
 
   // 신규 플레이어를 위한 무료 챔피언 목록
-  const newPlayerChampions = freeChampionIdsForNewPlayers
+  const newPlayerChampions = (freeChampionIdsForNewPlayers || [])
     .map((id) =>
-      champions && champions.data
-        ? Object.values(champions.data).find(
-            (champion) => champion.key === id.toString()
-          )
-        : null
+      champions.find((champion) => champion.dataInfo.key === id.toString())
     )
-    .filter(Boolean);
+    .filter((champion): champion is ChampionList => champion !== undefined);
+
+  console.log(newPlayerChampions);
 
   return (
     <div className="inner m-center">
       <h2 className="page-title">무료 챔피언 목록</h2>
-      <ul className="grid grid-cols-4 gap-5">
-        {Array.isArray(freeChampions) && freeChampions.length > 0 ? (
-          freeChampions.map(
-            (champion) =>
-              champion && (
-                <CardItem
-                  key={champion.key}
-                  cardId={champion.id}
-                  cardName={champion.name}
-                  descript={champion.title}
-                  img={`https://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${champion.image.full}`}
-                />
-              )
-          )
-        ) : (
-          <div>무료 챔피언이 없습니다.</div> // 배열이 없거나 비어 있을 때 보여줄 메시지
-        )}
-      </ul>
+      <CardList
+        listData={freeChampions}
+        mode="champion"
+        version={latestVersion}
+      />
 
       <h2 className="page-title">신규 플레이어를 위한 무료 챔피언 목록</h2>
-      <ul className="grid grid-cols-4 gap-5">
-        {newPlayerChampions &&
-          newPlayerChampions.map(
-            (champion) =>
-              champion && (
-                <CardItem
-                  key={champion.key}
-                  cardId={champion.id}
-                  cardName={champion.name}
-                  descript={champion.title}
-                  img={`https://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${champion.image.full}`}
-                />
-              )
-          )}
-      </ul>
+      <CardList
+        listData={newPlayerChampions}
+        mode="champion"
+        version={latestVersion}
+      />
     </div>
   );
 };
