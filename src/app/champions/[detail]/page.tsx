@@ -1,6 +1,7 @@
 import { Champion } from "@/types/Champion";
 import { fetchChampionDetail, getLatestVersion } from "@/api/serverApi";
 import { Metadata } from "next";
+import { apiURL } from "@/api/constants";
 
 interface Props {
   params: {
@@ -43,7 +44,7 @@ const ChampionDetailPage = async ({ params }: Props) => {
       <h1>{champion.name}</h1>
       <h2>{champion.title}</h2>
       <img
-        src={`https://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${champion.image.full}`}
+        src={`${apiURL}/cdn/${version}/img/champion/${champion.image.full}`}
         alt={champion.name}
       />
       <p>{champion.blurb}</p>

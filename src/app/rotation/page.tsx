@@ -6,6 +6,7 @@ import CardItem from "@/components/ui/CardItem";
 import { ChampionRotation } from "@/types/ChampionRotation";
 import { Metadata } from "next";
 import CardList from "@/components/ui/CardList";
+import Loading from "../loading";
 
 // export const metadata: Metadata = {
 //   title: "LOL Info: 이번주 로테이션",
@@ -50,7 +51,7 @@ const RotationPage = () => {
   });
 
   if (rotaionPending || championPending) {
-    return <div>로딩 중...</div>;
+    return <Loading />;
   }
 
   if (rotationError || championsError) {

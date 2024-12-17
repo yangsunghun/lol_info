@@ -16,6 +16,7 @@ export const getLatestVersion = async (): Promise<string> => {
 export const fetchChampionList = async (): Promise<ChampionList[]> => {
   try {
     const latestVersion = await getLatestVersion();
+
     const response = await fetch(
       `${apiURL}/cdn/${latestVersion}/data/ko_KR/champion.json`
     );
