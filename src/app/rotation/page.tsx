@@ -81,14 +81,14 @@ const RotationPage = () => {
 
   return (
     <div className="inner m-center">
-      <h2 className="page-title">무료 챔피언 목록</h2>
+      <h2 className="page-title">이번 주 무료 챔피언</h2>
       <CardList
         listData={freeChampions}
         mode="champion"
         version={latestVersion}
       />
 
-      <h2 className="page-title">신규 플레이어를 위한 무료 챔피언 목록</h2>
+      <h2 className="page-title">신규 플레이어를 위한 무료 챔피언</h2>
       <CardList
         listData={newPlayerChampions}
         mode="champion"

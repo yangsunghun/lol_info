@@ -30,13 +30,6 @@ export interface Champion {
   passive?: ChampionPassive; // 패시브 정보 (선택적)
 }
 
-export interface ChampionDetail {
-  type: string; // 타입 (champion)
-  format: string; // 데이터 형식 (standAloneComplex)
-  version: string; // API 버전
-  data: { [key: string]: Champion }; // 챔피언 데이터, 챔피언 이름을 키로
-}
-
 export interface ChampionImage {
   full: string; // 전체 이미지 파일 이름
   sprite: string; // 스프라이트 이미지 파일 이름
