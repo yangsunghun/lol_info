@@ -6,6 +6,7 @@ import React, { useState } from "react";
 import SkinCarousel from "@/components/ui/Carousel";
 import { SwiperSlide } from "swiper/react";
 import DetailModalItems from "./DetailModal";
+import { cleanDescription } from "@/utils/cleanDescript";
 
 type Props = {
   champion: Champion;
@@ -78,7 +79,7 @@ const Detail = ({ champion, version }: Props) => {
                         <p className="text-[20px] font-semibold mb-2">
                           {champion.passive.name}
                         </p>
-                        <p>{champion.passive.description}</p>
+                        <p>{cleanDescription(champion.passive.description)}</p>
                       </div>
                     </li>
                   )}
