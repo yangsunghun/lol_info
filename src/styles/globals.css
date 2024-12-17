@@ -91,16 +91,55 @@
     position: relative;
     width: 64px;
     height: 64px;
-    border-radius: 3px;
+    border-radius: 5px;
     background-size: 100%;
   }
 
-  .skills .skil-hover {
+  .skills > li .keyboard {
     position: absolute;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+    width: 22px;
+    padding: 4px 0 2px;
+    background: rgba(0, 0, 0, 0.85);
+    border-radius: 5px 0 5px 0;
+    text-align: center;
+    font-weight: 500;
+    line-height: 1;
+  }
+
+  .skills > li:nth-child(1) .keyboard {
+    color: #0093ff;
+  }
+  .skills > li:nth-child(2) .keyboard {
+    color: #00d2eb;
+  }
+  .skills > li:nth-child(3) .keyboard {
+    color: #00e7ba;
+  }
+  .skills > li:nth-child(4) .keyboard {
+    color: #92f489;
+  }
+  .skills > li:nth-child(5) .keyboard {
+    color: #f9f871;
+  }
+
+  .skills li .skill-hover {
+    display: none;
+    position: absolute;
+    left: 0;
+    top: calc(100% + 10px);
     width: 300px;
     padding: 20px;
-    background: rgb(var(--foreground-rgb));
+    border-radius: 5px;
+    background: rgba(var(--foreground-rgb), 0.9);
     color: rgb(var(--background-rgb));
+    word-break: keep-all;
+  }
+
+  .skills li:hover .skill-hover {
+    display: block;
   }
 
   .modal-overlay {
@@ -121,7 +160,6 @@
     transform: translate(-50%, -50%);
     background: #fff;
     border-radius: 10px;
-    width: 1000px;
     max-width: 90%;
     padding: 40px 30px;
   }
@@ -136,6 +174,30 @@
     position: relative;
     width: 100%;
     aspect-ratio: 1.69456/1;
+  }
+
+  .modal-skill-img {
+    position: relative;
+    width: 100px;
+    aspect-ratio: 1/1;
+  }
+
+  .skill-info {
+    width: calc(100% - 140px);
+  }
+
+  .skill-option {
+    margin-top: 20px;
+    width: 90%;
+  }
+
+  .skill-option > li {
+    width: 50%;
+    margin-top: 10px;
+  }
+  .skill-option b {
+    display: block;
+    margin-right: 10px;
   }
 }
 

@@ -69,6 +69,7 @@ export interface ChampionSpell {
   cost: number[]; // 소모 마나
   costBurn: string; // 소모 마나 문자열
   range: number[]; // 범위
+  rangeBurn: number; // 범위
   image: ChampionImage; // 스펠 이미지 정보
   resource: string; // 자원 타입
 }

@@ -46,6 +46,7 @@ const Detail = ({ champion, version }: Props) => {
         isOpen={isModalOpen}
         onClose={closeModal}
         champion={champion}
+        version={version}
       />
       <section className="inner m-center pt-[50px] pb-[100px]">
         <div className="flex-box align-center">
@@ -59,18 +60,33 @@ const Detail = ({ champion, version }: Props) => {
             <p className="text-[18px]  opacity-[.7]">{champion.title}</p>
             <p className="text-[30px] font-semibold">{champion.name}</p>
             <p className="text-[17px] font-light leading-[1.6] mt-5 max-w-[80%] break-keep opacity-[.9]">
-              {champion.blurb}
+              {champion.lore}
             </p>
 
             <div className="mt-10 flex flex-row gap-4">
-              <p>공격력: {champion.info?.attack ?? "정보 없음"}</p>
-              <p>방어력: {champion.info?.defense ?? "정보 없음"}</p>
-              <p>마법: {champion.info?.magic ?? "정보 없음"}</p>
-              <p>난이도: {champion.info?.difficulty ?? "정보 없음"}</p>
+              <p>공격력: {champion.info?.attack}</p>
+              <p>방어력: {champion.info?.defense}</p>
+              <p>마법: {champion.info?.magic}</p>
+              <p>난이도: {champion.info?.difficulty}</p>
             </div>
 
             <p className="mt-10 text-[24px] font-semibold">스킬</p>
             <ul className="mt-2 skills flex gap-5">
+              {champion.passive && (
+                <li
+                  style={{
+                    backgroundImage: `url(${apiURL}/cdn/${version}/img/passive/${champion.passive.image.full})`,
+                  }}
+                >
+                  <p className="keyboard">P</p>
+                  <div className="skill-hover">
+                    <p className="text-[20px] font-semibold mb-2">
+                      {champion.passive.name}
+                    </p>
+                    <p>{champion.passive.description}</p>
+                  </div>
+                </li>
+              )}
               {spellsWithKeys.map((spell) => (
                 <li
                   key={spell.id}
@@ -83,9 +99,11 @@ const Detail = ({ champion, version }: Props) => {
                     onClick={() => openModal(spell)}
                   ></button>
 
-                  <p>{spell.key}</p>
-                  <div className="skil-hover">
-                    <p>{spell.name}</p>
+                  <p className="keyboard">{spell.key}</p>
+                  <div className="skill-hover">
+                    <p className="text-[20px] font-semibold mb-2">
+                      {spell.name}
+                    </p>
                     <p>{spell.description}</p>
                   </div>
                 </li>
