@@ -63,52 +63,100 @@ const Detail = ({ champion, version }: Props) => {
               {champion.lore}
             </p>
 
-            <div className="mt-10 flex flex-row gap-4">
-              <p>공격력: {champion.info?.attack}</p>
-              <p>방어력: {champion.info?.defense}</p>
-              <p>마법: {champion.info?.magic}</p>
-              <p>난이도: {champion.info?.difficulty}</p>
+            <div className="flex gap-20">
+              <article>
+                <p className="mt-10 text-[24px] font-semibold">스킬</p>
+                <ul className="mt-2 skills flex gap-5">
+                  {champion.passive && (
+                    <li
+                      style={{
+                        backgroundImage: `url(${apiURL}/cdn/${version}/img/passive/${champion.passive.image.full})`,
+                      }}
+                    >
+                      <p className="keyboard">P</p>
+                      <div className="skill-hover">
+                        <p className="text-[20px] font-semibold mb-2">
+                          {champion.passive.name}
+                        </p>
+                        <p>{champion.passive.description}</p>
+                      </div>
+                    </li>
+                  )}
+                  {spellsWithKeys.map((spell) => (
+                    <li
+                      key={spell.id}
+                      style={{
+                        backgroundImage: `url(${apiURL}/cdn/${version}/img/spell/${spell.image.full})`,
+                      }}
+                    >
+                      <button
+                        className="click-box"
+                        onClick={() => openModal(spell)}
+                      ></button>
+
+                      <p className="keyboard">{spell.key}</p>
+                      <div className="skill-hover">
+                        <p className="text-[20px] font-semibold mb-2">
+                          {spell.name}
+                        </p>
+                        <p>{spell.description}</p>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              </article>
+
+              <article className="champ-stats">
+                <p className="mt-10 text-[24px] font-semibold">능력치</p>
+                <ul className="stats-bar">
+                  <li>
+                    <b>생명력</b>
+                    <div
+                      className="bar"
+                      style={{
+                        width: `${champion.info?.defense}0%`,
+                        backgroundColor: "#5edc01",
+                      }}
+                      title={`${champion.info?.defense}`}
+                    ></div>
+                  </li>
+                  <li>
+                    <b>공격력</b>
+                    <div
+                      className="bar"
+                      style={{
+                        width: `${champion.info?.attack}0%`,
+                        backgroundColor: "#ef2401",
+                      }}
+                      title={`${champion.info?.attack}`}
+                    ></div>
+                  </li>
+
+                  <li>
+                    <b>주문력</b>
+                    <div
+                      className="bar"
+                      style={{
+                        width: `${champion.info?.magic}0%`,
+                        backgroundColor: "#02a2ff",
+                      }}
+                      title={`${champion.info?.magic}`}
+                    ></div>
+                  </li>
+                  <li>
+                    <b>난이도</b>
+                    <div
+                      className="bar"
+                      style={{
+                        width: `${champion.info?.difficulty}0%`,
+                        backgroundColor: "#a800ff",
+                      }}
+                      title={`${champion.info?.difficulty}`}
+                    ></div>
+                  </li>
+                </ul>
+              </article>
             </div>
-
-            <p className="mt-10 text-[24px] font-semibold">스킬</p>
-            <ul className="mt-2 skills flex gap-5">
-              {champion.passive && (
-                <li
-                  style={{
-                    backgroundImage: `url(${apiURL}/cdn/${version}/img/passive/${champion.passive.image.full})`,
-                  }}
-                >
-                  <p className="keyboard">P</p>
-                  <div className="skill-hover">
-                    <p className="text-[20px] font-semibold mb-2">
-                      {champion.passive.name}
-                    </p>
-                    <p>{champion.passive.description}</p>
-                  </div>
-                </li>
-              )}
-              {spellsWithKeys.map((spell) => (
-                <li
-                  key={spell.id}
-                  style={{
-                    backgroundImage: `url(${apiURL}/cdn/${version}/img/spell/${spell.image.full})`,
-                  }}
-                >
-                  <button
-                    className="click-box"
-                    onClick={() => openModal(spell)}
-                  ></button>
-
-                  <p className="keyboard">{spell.key}</p>
-                  <div className="skill-hover">
-                    <p className="text-[20px] font-semibold mb-2">
-                      {spell.name}
-                    </p>
-                    <p>{spell.description}</p>
-                  </div>
-                </li>
-              ))}
-            </ul>
           </div>
         </div>
 
