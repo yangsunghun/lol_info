@@ -89,6 +89,53 @@
 
   .skills > li {
     position: relative;
+    width: 64px;
+    height: 64px;
+    border-radius: 3px;
+    background-size: 100%;
+  }
+
+  .skills .skil-hover {
+    position: absolute;
+    width: 300px;
+    padding: 20px;
+    background: rgb(var(--foreground-rgb));
+    color: rgb(var(--background-rgb));
+  }
+
+  .modal-overlay {
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 999;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(2px);
+  }
+
+  .modal-content {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background: #fff;
+    border-radius: 10px;
+    width: 1000px;
+    max-width: 90%;
+    padding: 40px 30px;
+  }
+
+  .modal-content .close {
+    position: absolute;
+    right: 30px;
+    top: 20px;
+  }
+
+  .modal-skin-img {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1.69456/1;
   }
 }
 

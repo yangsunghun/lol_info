@@ -1,33 +1,37 @@
+import { X } from "lucide-react";
+import Button from "./Button";
+
 type Props = {
   isOpen: boolean;
-  title: string;
-  description?: string;
+
   children: React.ReactNode;
   onClose: () => void;
 };
 
-const ModalItem = ({
-  isOpen,
-  onClose,
-  title,
-  description,
-  children,
-}: Props) => {
+const ModalItem = ({ isOpen, onClose, children }: Props) => {
   if (!isOpen) return null;
 
+  const handleOverlayClick = (event: React.MouseEvent<HTMLDivElement>) => {
+    if (event.target === event.currentTarget) {
+      onClose();
+    }
+  };
   return (
-    <div className="modal-overlay">
-      {" "}
-      {/* 모달 배경 */}
+    <div className="modal-overlay text-black" onClick={handleOverlayClick}>
       <div className="modal-content">
-        {" "}
-        {/* 모달 내용 */}
-        <header>
-          <h2>{title}</h2>
-          {description && <p>{description}</p>}
-          <button onClick={onClose}>닫기</button>
-        </header>
+        <button className="close" onClick={onClose}>
+          <X />
+        </button>
         <div className="modal-body">{children}</div>
+        <Button
+          className="mt-3 float-end"
+          size="default"
+          color="black"
+          fill={true}
+          handleClick={onClose}
+        >
+          닫기
+        </Button>
       </div>
     </div>
   );

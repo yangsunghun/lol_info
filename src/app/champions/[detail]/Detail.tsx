@@ -45,6 +45,7 @@ const Detail = ({ champion, version }: Props) => {
         selectedModalData={selectedModalData}
         isOpen={isModalOpen}
         onClose={closeModal}
+        champion={champion}
       />
       <section className="inner m-center pt-[50px] pb-[100px]">
         <div className="flex-box align-center">
@@ -69,51 +70,39 @@ const Detail = ({ champion, version }: Props) => {
             </div>
 
             <p className="mt-10 text-[24px] font-semibold">스킬</p>
-            <ul className="mt-2 skills flex">
+            <ul className="mt-2 skills flex gap-5">
               {spellsWithKeys.map((spell) => (
-                <li key={spell.id}>
+                <li
+                  key={spell.id}
+                  style={{
+                    backgroundImage: `url(${apiURL}/cdn/${version}/img/spell/${spell.image.full})`,
+                  }}
+                >
                   <button
                     className="click-box"
                     onClick={() => openModal(spell)}
                   ></button>
-                  <img
-                    src={`${apiURL}/cdn/${version}/img/spell/${spell.image.full}`}
-                    alt={spell.name}
-                  />
-                  <div className="">
-                    <p>{spell.key}</p>
+
+                  <p>{spell.key}</p>
+                  <div className="skil-hover">
                     <p>{spell.name}</p>
                     <p>{spell.description}</p>
                   </div>
                 </li>
               ))}
-              {/*
-                id: string; // 스펠 ID
-                name: string; // 스펠 이름
-                description: string; // 스펠 설명
-                tooltip: string; // 툴팁
-                leveltip: {
-                  label: string[]; // 레벨 팁 레이블
-                  effect: string[]; // 레벨 팁 효과
-                };
-                maxrank: number; // 최대 레벨
-                cooldown: number[]; // 재사용 대기시간
-                cooldownBurn: string; // 재사용 대기시간 문자열
-                cost: number[]; // 소모 마나
-                costBurn: string; // 소모 마나 문자열
-                range: number[]; // 범위
-                image: ChampionImage; // 스펠 이미지 정보
-                resource: string; // 자원 타입
-              */}
             </ul>
           </div>
         </div>
 
-        <p className="mt-20">스킨</p>
+        <p className="mt-[50px] mb-3 text-[24px] font-semibold">챔피언 스킨</p>
         <SkinCarousel>
           {champion.skins?.map((skin) => (
             <SwiperSlide key={skin.id}>
-              <figure className="skin-img">
+              <figure className="skin-img relative">
+                <button
+                  className="click-box"
+                  onClick={() => openModal(skin)}
+                ></button>
                 <Image
                   src={`${apiURL}/cdn/img/champion/splash/${champion.id}_${skin.num}.jpg`}
                   alt={skin.name}
@@ -122,7 +111,6 @@ const Detail = ({ champion, version }: Props) => {
                   priority
                   className="object-cover rounded-lg"
                 />
-                <figcaption>{skin.name}</figcaption>
               </figure>
             </SwiperSlide>
           ))}

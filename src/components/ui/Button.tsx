@@ -9,7 +9,7 @@ type ButtonProps = {
   className?: string;
   handleClick?: () => void;
   children: React.ReactNode;
-  color?: "primary" | "secondary" | "danger";
+  color?: "primary" | "secondary" | "danger" | "black";
   fill?: boolean;
 };
 
@@ -36,6 +36,9 @@ const Button: React.FC<ButtonProps> = ({
       : "border border-gray-300 text-gray-300 hover:bg-gray-100",
     danger: fill
       ? "bg-red-500 text-white hover:bg-red-600"
+      : "border border-red-500 text-red-500 hover:bg-red-100",
+    black: fill
+      ? "bg-black text-white hover:bg-red-600"
       : "border border-red-500 text-red-500 hover:bg-red-100",
   }[color];
 
