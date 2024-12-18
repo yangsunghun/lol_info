@@ -1,5 +1,4 @@
-import CardItem from "@/components/ui/CardItem";
-import { RefinedItemData, ItemList, ItemListResponse } from "@/types/Item";
+import { ItemList } from "@/types/Item";
 import { fetchItemList, getLatestVersion } from "@/api/serverApi";
 import { Metadata } from "next";
 import CardList from "@/components/ui/CardList";

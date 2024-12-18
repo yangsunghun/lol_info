@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import CardItem from "./CardItem";
 import { apiURL } from "@/api/constants";
 import ItemModalItems from "@/app/items/ItemModal";
@@ -16,7 +16,7 @@ export interface ListData {
 interface CardListProps {
   listData: ListData[];
   mode: "champion" | "item";
-  version: string | undefined;
+  version?: string;
   sorting?: boolean;
 }
 

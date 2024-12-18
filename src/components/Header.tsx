@@ -9,7 +9,6 @@ const Header = () => {
         <h1>
           <Link href="/">
             <svg
-              width="auto"
               height="100%"
               viewBox="0 0 24 24"
               role="img"

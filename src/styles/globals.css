@@ -54,19 +54,23 @@
   .intro-layout {
     display: flex;
     width: 1125px;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
   }
 
   .intro-layout > li {
     flex: 1;
     position: relative;
     height: 450px;
+    overflow: hidden;
   }
 
   .intro-layout > li img {
-    object-fit: cover;
+    width: 100%;
+    height: auto;
     filter: grayscale(100%);
     -webkit-filter: grayscale(100%);
     -moz-filter: grayscale(100%);
+    transform: translate(0, -10%) scale(1);
     transition: 0.3s;
   }
 
@@ -84,6 +88,7 @@
     filter: grayscale(0);
     -webkit-filter: grayscale(0);
     -moz-filter: grayscale(0);
+    transform: translate(0, -10%) scale(1.05);
   }
 
   .intro-layout > li a:hover {
@@ -278,11 +283,11 @@
     width: 0;
     height: 100%;
     background: #fff;
-    transition: width 1s ease;
+    transition: width 1.5s ease;
     animation-delay: 0.5s; /* 애니메이션 지연 시간 설정 */
   }
 
-  .stats-bar .bar::after {
+  /* .stats-bar .bar::after {
     content: "";
     position: absolute;
     left: 0;
@@ -295,7 +300,7 @@
       rgba(0, 0, 0, 0.1),
       transparent
     );
-  }
+  } */
 
   .slide-arrow {
     position: absolute;

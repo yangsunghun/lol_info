@@ -147,7 +147,6 @@ const Detail = ({ champion, version }: Props) => {
                           style={{
                             width: barWidths[stat.valueKey] || "0%", // 초기값 0%
                             backgroundColor: stat.color,
-                            transition: "width 1s ease", // 애니메이션
                           }}
                           title={
                             champion.info?.[stat.valueKey]?.toString() || "0"

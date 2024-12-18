@@ -10,7 +10,7 @@ export default function Home() {
         </h2>
         <ul className="intro-layout m-center flex-box">
           <li>
-            <Image src="/champions.png" alt="챔피언" fill={true} />
+            <Image src="/champions.png" alt="챔피언" width={375} height={375} />
             <Link
               className="click-box flex justify-center items-center"
               href="/champions"
@@ -19,7 +19,7 @@ export default function Home() {
             </Link>
           </li>
           <li>
-            <Image src="/rotation.png" alt="챔피언" fill={true} />
+            <Image src="/rotation.png" alt="챔피언" width={375} height={375} />
             <Link
               className="click-box flex justify-center items-center"
               href="/rotation"
@@ -28,7 +28,7 @@ export default function Home() {
             </Link>
           </li>
           <li>
-            <Image src="/items.png" alt="챔피언" fill={true} />
+            <Image src="/items.png" alt="챔피언" width={375} height={375} />
             <Link
               className="click-box flex justify-center items-center"
               href="/items"
