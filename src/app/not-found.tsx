@@ -12,7 +12,7 @@ const NotFound = () => {
   };
 
   return (
-    <section className="not-found flex items-center justify-center">
+    <section className="exclude-header flex items-center justify-center">
       <div className="text-center">
         <p className="text-[40px]">페이지 오류 안내 404</p>
         <p className="mt-5">

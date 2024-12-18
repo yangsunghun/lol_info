@@ -37,9 +37,60 @@
     width: 100vw;
     opacity: 0.3;
   }
+
+  .exclude-header {
+    height: calc(100vh - var(--header-height));
+  }
 }
 
 @layer components {
+  .intro-title {
+    transform: translateY(-30px);
+  }
+  .intro-title img {
+    display: inline-block;
+  }
+
+  .intro-layout {
+    display: flex;
+    width: 1125px;
+  }
+
+  .intro-layout > li {
+    flex: 1;
+    position: relative;
+    height: 450px;
+  }
+
+  .intro-layout > li img {
+    object-fit: cover;
+    filter: grayscale(100%);
+    -webkit-filter: grayscale(100%);
+    -moz-filter: grayscale(100%);
+    transition: 0.3s;
+  }
+
+  .intro-layout > li a {
+    display: flex;
+    font-size: 30px;
+    font-weight: 600;
+    color: #fff;
+    background: rgba(0, 0, 0, 0.4);
+    text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
+    transition: 0.3s;
+  }
+
+  .intro-layout > li:hover img {
+    filter: grayscale(0);
+    -webkit-filter: grayscale(0);
+    -moz-filter: grayscale(0);
+  }
+
+  .intro-layout > li a:hover {
+    background: rgba(0, 0, 0, 0.2);
+    text-shadow: 0px 0px 5px rgba(0, 0, 0, 1);
+  }
+
   .page-title {
     margin: 100px 0 50px;
     font-size: 32px;
@@ -66,10 +117,6 @@
 
   .card-item > div {
     width: calc(100% - 100px);
-  }
-
-  .not-found {
-    height: calc(100vh - var(--header-height));
   }
 
   .champ-image {
