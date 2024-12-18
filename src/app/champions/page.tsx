@@ -36,7 +36,12 @@ const ChampionPage = async () => {
     <div className="inner m-center">
       <h2 className="page-title">챔피언 목록</h2>
 
-      <CardList listData={refinedData} mode="champion" version={version} />
+      <CardList
+        listData={refinedData}
+        mode="champion"
+        version={version}
+        sorting={true}
+      />
     </div>
   );
 };

@@ -17,9 +17,15 @@ interface CardListProps {
   listData: ListData[];
   mode: "champion" | "item";
   version: string | undefined;
+  sorting?: boolean;
 }
 
-const CardList: React.FC<CardListProps> = ({ listData, version, mode }) => {
+const CardList: React.FC<CardListProps> = ({
+  listData,
+  version,
+  mode,
+  sorting,
+}) => {
   const [selectedModalData, setSelectedModalData] = useState<string | null>(
     null
   );
@@ -45,10 +51,12 @@ const CardList: React.FC<CardListProps> = ({ listData, version, mode }) => {
         onClose={closeModal}
       />
 
-      <CardFilter
-        listData={listData} // 원본 데이터 전달
-        setFilteredListData={setFilteredListData} // 필터링된 데이터 설정 함수 전달
-      />
+      {sorting && (
+        <CardFilter
+          listData={listData}
+          setFilteredListData={setFilteredListData}
+        />
+      )}
 
       <ul className="grid grid-cols-4 gap-5 pb-[100px]">
         {filteredListData.map((card) => {

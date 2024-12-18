@@ -38,7 +38,7 @@ const ItemPage = async () => {
         listData={refinedData}
         mode="item"
         version={version}
-        hasModal={true}
+        sorting={true}
       />
     </div>
   );
