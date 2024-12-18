@@ -1,11 +1,10 @@
 "use client";
 
-import { ChampionList } from "@/types/Champion";
-import { Item, ItemList } from "@/types/Item";
 import React, { useEffect, useState } from "react";
 import CardItem from "./CardItem";
 import { apiURL } from "@/api/constants";
 import ItemModalItems from "@/app/items/ItemModal";
+import CardFilter from "../CardFilter";
 
 export interface ListData {
   engName?: string;
@@ -18,7 +17,6 @@ interface CardListProps {
   listData: ListData[];
   mode: "champion" | "item";
   version: string | undefined;
-  hasModal?: boolean;
 }
 
 const CardList: React.FC<CardListProps> = ({ listData, version, mode }) => {
@@ -26,6 +24,8 @@ const CardList: React.FC<CardListProps> = ({ listData, version, mode }) => {
     null
   );
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [filteredListData, setFilteredListData] =
+    useState<ListData[]>(listData);
 
   const openModal = (modalData: string) => {
     setSelectedModalData(modalData);
@@ -44,26 +44,31 @@ const CardList: React.FC<CardListProps> = ({ listData, version, mode }) => {
         isOpen={isModalOpen}
         onClose={closeModal}
       />
-      <ul className="grid grid-cols-4 gap-5">
-        {listData &&
-          listData.map((card) => {
-            return (
-              <CardItem
-                key={card.key}
-                cardName={card.name}
-                descript={card.descript}
-                {...(mode === "champion"
-                  ? {
-                      cardId: card.engName,
-                      img: `${apiURL}/cdn/${version}/img/${mode}/${card.engName}.png`,
-                    }
-                  : {
-                      onClick: () => openModal(card.key),
-                      img: `${apiURL}/cdn/${version}/img/${mode}/${card.key}.png`,
-                    })}
-              />
-            );
-          })}
+
+      <CardFilter
+        listData={listData} // 원본 데이터 전달
+        setFilteredListData={setFilteredListData} // 필터링된 데이터 설정 함수 전달
+      />
+
+      <ul className="grid grid-cols-4 gap-5 pb-[100px]">
+        {filteredListData.map((card) => {
+          return (
+            <CardItem
+              key={card.key}
+              cardName={card.name}
+              descript={card.descript}
+              {...(mode === "champion"
+                ? {
+                    cardId: card.engName,
+                    img: `${apiURL}/cdn/${version}/img/${mode}/${card.engName}.png`,
+                  }
+                : {
+                    onClick: () => openModal(card.key),
+                    img: `${apiURL}/cdn/${version}/img/${mode}/${card.key}.png`,
+                  })}
+            />
+          );
+        })}
       </ul>
     </>
   );
