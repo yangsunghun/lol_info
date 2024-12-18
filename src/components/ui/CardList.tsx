@@ -58,7 +58,7 @@ const CardList: React.FC<CardListProps> = ({
         />
       )}
 
-      <ul className="grid grid-cols-4 gap-5 pb-[100px]">
+      <ul className="card-list pb-[100px]">
         {filteredListData.map((card) => {
           return (
             <CardItem

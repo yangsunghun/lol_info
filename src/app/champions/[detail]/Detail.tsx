@@ -1,8 +1,13 @@
 "use client";
 import Image from "next/image";
 import { apiURL } from "@/api/constants";
-import { Champion, ChampionSkin, ChampionSpell } from "@/types/Champion";
-import React, { useState } from "react";
+import {
+  Champion,
+  ChampionInfo,
+  ChampionSkin,
+  ChampionSpell,
+} from "@/types/Champion";
+import React, { useEffect, useState } from "react";
 import SkinCarousel from "@/components/ui/Carousel";
 import { SwiperSlide } from "swiper/react";
 import DetailModalItems from "./DetailModal";
@@ -13,6 +18,19 @@ type Props = {
   version: string;
 };
 
+interface Stat {
+  label: string;
+  valueKey: keyof ChampionInfo;
+  color: string;
+}
+
+const stats: Stat[] = [
+  { label: "생명력", valueKey: "defense", color: "#5edc01" },
+  { label: "공격력", valueKey: "attack", color: "#ef2401" },
+  { label: "주문력", valueKey: "magic", color: "#02a2ff" },
+  { label: "난이도", valueKey: "difficulty", color: "#a800ff" },
+];
+
 const Detail = ({ champion, version }: Props) => {
   if (!champion) {
     return <div>챔피언 정보를 찾을 수 없습니다.</div>;
@@ -22,6 +40,16 @@ const Detail = ({ champion, version }: Props) => {
     ChampionSkin | ChampionSpell | null
   >(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [barWidths, setBarWidths] = useState<Record<string, string>>({});
+
+  useEffect(() => {
+    const newBarWidths: Record<string, string> = {};
+    stats.forEach((stat) => {
+      const value = champion.info?.[stat.valueKey]; // info가 undefined일 수 있음
+      newBarWidths[stat.valueKey] = value != null ? `${value}0%` : "0%"; // null 체크 후 설정
+    });
+    setBarWidths(newBarWidths);
+  }, [champion.info]);
 
   const openModal = (modalData: ChampionSkin | ChampionSpell) => {
     setSelectedModalData(modalData);
@@ -110,59 +138,24 @@ const Detail = ({ champion, version }: Props) => {
               <article className="champ-stats">
                 <p className="mt-10 text-[24px] font-semibold">능력치</p>
                 <ul className="stats-bar">
-                  <li>
-                    <b>생명력</b>
-                    <div className="bar">
-                      <div
-                        className="bar-fill"
-                        style={{
-                          width: `${champion.info?.defense}0%`,
-                          backgroundColor: "#5edc01",
-                        }}
-                        title={`${champion.info?.defense}`}
-                      ></div>
-                    </div>
-                  </li>
-                  <li>
-                    <b>공격력</b>
-                    <div className="bar">
-                      <div
-                        className="bar-fill"
-                        style={{
-                          width: `${champion.info?.attack}0%`,
-                          backgroundColor: "#ef2401",
-                        }}
-                        title={`${champion.info?.attack}`}
-                      ></div>
-                    </div>
-                  </li>
-
-                  <li>
-                    <b>주문력</b>
-                    <div className="bar">
-                      <div
-                        className="bar-fill"
-                        style={{
-                          width: `${champion.info?.magic}0%`,
-                          backgroundColor: "#02a2ff",
-                        }}
-                        title={`${champion.info?.magic}`}
-                      ></div>
-                    </div>
-                  </li>
-                  <li>
-                    <b>난이도</b>
-                    <div className="bar">
-                      <div
-                        className="bar-fill"
-                        style={{
-                          width: `${champion.info?.difficulty}0%`,
-                          backgroundColor: "#a800ff",
-                        }}
-                        title={`${champion.info?.difficulty}`}
-                      ></div>
-                    </div>
-                  </li>
+                  {stats.map((stat) => (
+                    <li key={stat.valueKey}>
+                      <b>{stat.label}</b>
+                      <div className="bar">
+                        <div
+                          className="bar-fill"
+                          style={{
+                            width: barWidths[stat.valueKey] || "0%", // 초기값 0%
+                            backgroundColor: stat.color,
+                            transition: "width 1s ease", // 애니메이션
+                          }}
+                          title={
+                            champion.info?.[stat.valueKey]?.toString() || "0"
+                          } // title 설정
+                        ></div>
+                      </div>
+                    </li>
+                  ))}
                 </ul>
               </article>
             </div>

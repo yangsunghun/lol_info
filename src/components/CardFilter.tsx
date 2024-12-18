@@ -1,6 +1,5 @@
 "use client";
 import { getInitial, getVowel } from "@/utils/getUnicode";
-import { useState } from "react";
 import { ListData } from "./ui/CardList";
 
 interface CardFilterProps {
@@ -26,7 +25,7 @@ const CardFilter: React.FC<CardFilterProps> = ({
   };
 
   return (
-    <div className="flex gap-3 mb-4">
+    <div className="flex items-end gap-3 mb-8">
       <button onClick={() => setFilteredListData(listData)}>모두 보기</button>
       <button onClick={() => filterByInitial("ㄱ")}>ㄱ</button>
       <button onClick={() => filterByInitial("ㄴ")}>ㄴ</button>

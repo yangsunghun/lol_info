@@ -97,6 +97,12 @@
     font-weight: 500;
   }
 
+  .card-list {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1.25rem;
+  }
+
   .card-item {
     position: relative;
     padding: 20px;
@@ -269,11 +275,14 @@
   }
   .stats-bar .bar-fill {
     position: relative;
+    width: 0;
     height: 100%;
     background: #fff;
+    transition: width 1s ease;
+    animation-delay: 0.5s; /* 애니메이션 지연 시간 설정 */
   }
 
-  /* .stats-bar .bar::after {
+  .stats-bar .bar::after {
     content: "";
     position: absolute;
     left: 0;
@@ -286,7 +295,7 @@
       rgba(0, 0, 0, 0.1),
       transparent
     );
-  } */
+  }
 
   .slide-arrow {
     position: absolute;

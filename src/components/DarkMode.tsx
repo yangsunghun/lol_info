@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useTheme } from "next-themes";
+import { Moon, Sun } from "lucide-react";
 
 const DarkMode = () => {
   const { theme, setTheme } = useTheme();
@@ -17,7 +18,7 @@ const DarkMode = () => {
 
   return (
     <button onClick={() => setTheme(theme === "dark" ? "light" : "dark")}>
-      {theme === "dark" ? "밝게" : "어둡게"}
+      {theme === "dark" ? <Moon /> : <Sun />}
     </button>
   );
 };
