@@ -20,11 +20,26 @@ const ItemPage = async () => {
     getLatestVersion(),
   ]);
 
+  const mapItemData = (items: ItemList[]) => {
+    return items.map((item) => ({
+      key: item.dataName,
+      name: item.dataInfo.name,
+      descript: item.dataInfo.plaintext,
+    }));
+  };
+
+  const refinedData = mapItemData(items);
+
   return (
     <div className="inner m-center">
       <h2 className="page-title">아이템 목록</h2>
 
-      <CardList listData={items} mode="item" version={version} />
+      <CardList
+        listData={refinedData}
+        mode="item"
+        version={version}
+        hasModal={true}
+      />
     </div>
   );
 };

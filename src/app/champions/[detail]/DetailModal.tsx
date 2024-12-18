@@ -74,25 +74,6 @@ const DetailModalItems = ({
               </li>
             </ul>
           </div>
-
-          {/*
-                id: string; // 스펠 ID
-                name: string; // 스펠 이름
-                description: string; // 스펠 설명
-                tooltip: string; // 툴팁
-                leveltip: {
-                  label: string[]; // 레벨 팁 레이블
-                  effect: string[]; // 레벨 팁 효과
-                };
-                maxrank: number; // 최대 레벨
-                cooldown: number[]; // 재사용 대기시간
-                cooldownBurn: string; // 재사용 대기시간 문자열
-                cost: number[]; // 소모 마나
-                costBurn: string; // 소모 마나 문자열
-                range: number[]; // 범위
-                image: ChampionImage; // 스펠 이미지 정보
-                resource: string; // 자원 타입
-              */}
         </article>
       )}
     </ModalItem>

@@ -81,7 +81,7 @@ export interface ChampionInfo {
   difficulty: number; // 난이도
 }
 
-export interface ChampionStats {
+export interface ChampionStats { // 이것까진 못할것같음
   hp: number; // 체력
   hpperlevel: number; // 레벨당 체력 증가량
   mp: number; // 마나

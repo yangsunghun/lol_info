@@ -8,6 +8,7 @@ interface CardItemProps {
   cardName: string;
   descript: string;
   img: string;
+  onClick?: () => void;
 }
 
 const CardItem: React.FC<CardItemProps> = ({
@@ -15,11 +16,14 @@ const CardItem: React.FC<CardItemProps> = ({
   cardName,
   descript,
   img,
+  onClick,
 }) => {
   return (
     <li className="card-item flex-box">
-      {cardId && (
+      {cardId ? (
         <Link href={`/champions/${cardId}`} className="click-box"></Link>
+      ) : (
+        <button className="click-box" onClick={onClick}></button>
       )}
       <figure>
         <Image

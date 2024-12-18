@@ -21,11 +21,22 @@ const ChampionPage = async () => {
     getLatestVersion(),
   ]);
 
+  const mapChampionData = (champions: ChampionList[]) => {
+    return champions.map((champion) => ({
+      engName: champion.dataName,
+      name: champion.dataInfo.name,
+      key: champion.dataInfo.key,
+      descript: champion.dataInfo.title,
+    }));
+  };
+
+  const refinedData = mapChampionData(champions);
+
   return (
     <div className="inner m-center">
       <h2 className="page-title">챔피언 목록</h2>
 
-      <CardList listData={champions} mode="champion" version={version} />
+      <CardList listData={refinedData} mode="champion" version={version} />
     </div>
   );
 };
