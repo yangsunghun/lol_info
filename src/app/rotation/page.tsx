@@ -68,8 +68,6 @@ const RotationPage = () => {
     )
     .filter((champion): champion is ChampionList => champion !== undefined);
 
-  console.log(freeChampions);
-
   // 신규 플레이어를 위한 무료 챔피언 목록
   const newPlayerChampions = (freeChampionIdsForNewPlayers || [])
     .map((id) =>
@@ -77,20 +75,30 @@ const RotationPage = () => {
     )
     .filter((champion): champion is ChampionList => champion !== undefined);
 
-  console.log(newPlayerChampions);
+  const mapChampionData = (champions: ChampionList[]) => {
+    return champions.map((champion) => ({
+      engName: champion.dataName,
+      name: champion.dataInfo.name,
+      key: champion.dataInfo.key,
+      descript: champion.dataInfo.title,
+    }));
+  };
+
+  const refinedFreeChampions = mapChampionData(freeChampions);
+  const refinedNewPlayerChampions = mapChampionData(newPlayerChampions);
 
   return (
     <div className="inner m-center">
       <h2 className="page-title">이번 주 무료 챔피언</h2>
       <CardList
-        listData={freeChampions}
+        listData={refinedFreeChampions}
         mode="champion"
         version={latestVersion}
       />
 
       <h2 className="page-title">신규 플레이어를 위한 무료 챔피언</h2>
       <CardList
-        listData={newPlayerChampions}
+        listData={refinedNewPlayerChampions}
         mode="champion"
         version={latestVersion}
       />

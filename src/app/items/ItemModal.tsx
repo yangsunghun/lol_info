@@ -5,7 +5,7 @@ import { apiURL } from "@/api/constants";
 import { useQuery } from "@tanstack/react-query";
 import { fetchItemList, getLatestVersion } from "@/api/serverApi";
 import Loading from "../loading";
-import { cleanSemicolon } from "@/utils/cleanDescript";
+import { cleanDescription, cleanSemicolon } from "@/utils/cleanDescript";
 
 type Props = {
   selectedModalData: string | null;
@@ -49,7 +49,7 @@ const ItemModalItems = ({ isOpen, onClose, selectedModalData }: Props) => {
 
   return (
     <ModalItem isOpen={isOpen} onClose={onClose}>
-      <article className="flex-box gap-10 items-start max-w-[500px]">
+      <article className="flex-box gap-10 items-center max-w-[500px]">
         <figure className="modal-skill-img">
           <Image
             src={`${apiURL}/cdn/${version}/img/item/${selectedItem.dataName}.png`}
@@ -57,34 +57,39 @@ const ItemModalItems = ({ isOpen, onClose, selectedModalData }: Props) => {
             fill={true}
           />
         </figure>
-        <div className="">
+        <div className="skill-info">
           <p className="text-[24px] font-bold mb-1">
             {selectedItem.dataInfo.name}
+            &nbsp;&nbsp;
+            <span className="text-[16px] opacity-50">
+              {cleanSemicolon(selectedItem.dataInfo.colloq)}
+            </span>
           </p>
-          <p>{cleanSemicolon(selectedItem.dataInfo.colloq)}</p>
-          <p>{selectedItem.dataInfo.plaintext}</p>
-          <ul className="skill-option flex-box"></ul>
+          <p>
+            {selectedItem.dataInfo.plaintext
+              ? cleanDescription(selectedItem.dataInfo.plaintext)
+              : `설명이 없습니다.`}
+          </p>
         </div>
       </article>
-      {/* export interface Item {
-        name: string; // 아이템 이름
-        description: string; // 아이템 설명
-        colloq: string; // 발음 (콜로크)
-        plaintext: string; // 간단한 설명
-        into?: string[]; // 업그레이드 가능한 아이템 IDs
-        image: ItemImage; // 이미지 정보
-        gold: ItemGold; // 가격 정보
-        tags: string[]; // 태그
-        maps: { [key: string]: boolean }; // 맵에서의 사용 가능 여부
-        stats: ItemStats; // 통계
-      }
-      
-      export interface ItemGold {
-        base: number; // 기본 가격
-        purchasable: boolean; // 구매 가능 여부
-        total: number; // 총 가격
-        sell: number; // 판매 가격
-      } */}
+      <p className="mt-5">
+        {cleanDescription(selectedItem.dataInfo.description)}
+      </p>
+
+      <ul className="mt-5 flex justify-center gap-10 text-center">
+        <li>
+          <p className="font-bold">기본 가격</p>
+          {selectedItem.dataInfo.gold.base}
+        </li>
+        <li>
+          <p className="font-bold">총 가격</p>
+          {selectedItem.dataInfo.gold.total}
+        </li>
+        <li>
+          <p className="font-bold">판매 가격</p>
+          {selectedItem.dataInfo.gold.sell}
+        </li>
+      </ul>
     </ModalItem>
   );
 };
