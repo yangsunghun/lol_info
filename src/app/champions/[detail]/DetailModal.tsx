@@ -4,7 +4,7 @@ import Image from "next/image";
 import { Champion, ChampionSkin, ChampionSpell } from "@/types/Champion";
 import { apiURL } from "@/api/constants";
 
-type Props = {
+type DetailModalProps = {
   selectedModalData: ChampionSkin | ChampionSpell | null;
   isOpen: boolean;
   onClose: () => void;
@@ -18,7 +18,7 @@ const DetailModalItems = ({
   selectedModalData,
   champion,
   version,
-}: Props) => {
+}: DetailModalProps) => {
   if (!isOpen || !selectedModalData) return null;
 
   const skinTitle =

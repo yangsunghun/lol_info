@@ -3,7 +3,6 @@ import Button from "./Button";
 
 type Props = {
   isOpen: boolean;
-
   children: React.ReactNode;
   onClose: () => void;
 };

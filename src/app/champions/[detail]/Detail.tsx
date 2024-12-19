@@ -45,8 +45,8 @@ const Detail = ({ champion, version }: Props) => {
   useEffect(() => {
     const newBarWidths: Record<string, string> = {};
     stats.forEach((stat) => {
-      const value = champion.info?.[stat.valueKey]; // info가 undefined일 수 있음
-      newBarWidths[stat.valueKey] = value != null ? `${value}0%` : "0%"; // null 체크 후 설정
+      const value = champion.info?.[stat.valueKey];
+      newBarWidths[stat.valueKey] = value != null ? `${value}0%` : "0%";
     });
     setBarWidths(newBarWidths);
   }, [champion.info]);

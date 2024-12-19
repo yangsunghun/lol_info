@@ -7,6 +7,25 @@ interface CardFilterProps {
   setFilteredListData: React.Dispatch<React.SetStateAction<ListData[]>>; // 필터링된 데이터 설정 함수
 }
 
+const consonants = [
+  "ㄱ",
+  "ㄴ",
+  "ㄷ",
+  "ㄹ",
+  "ㅁ",
+  "ㅂ",
+  "ㅃ",
+  "ㅅ",
+  "ㅆ",
+  "ㅇ",
+  "ㅈ",
+  "ㅊ",
+  "ㅋ",
+  "ㅌ",
+  "ㅍ",
+  "ㅎ",
+];
+
 const CardFilter: React.FC<CardFilterProps> = ({
   listData,
   setFilteredListData,
@@ -27,22 +46,11 @@ const CardFilter: React.FC<CardFilterProps> = ({
   return (
     <div className="flex items-end gap-3 mb-8">
       <button onClick={() => setFilteredListData(listData)}>모두 보기</button>
-      <button onClick={() => filterByInitial("ㄱ")}>ㄱ</button>
-      <button onClick={() => filterByInitial("ㄴ")}>ㄴ</button>
-      <button onClick={() => filterByInitial("ㄷ")}>ㄷ</button>
-      <button onClick={() => filterByInitial("ㄹ")}>ㄹ</button>
-      <button onClick={() => filterByInitial("ㅁ")}>ㅁ</button>
-      <button onClick={() => filterByInitial("ㅂ")}>ㅂ</button>
-      <button onClick={() => filterByInitial("ㅃ")}>ㅃ</button>
-      <button onClick={() => filterByInitial("ㅅ")}>ㅅ</button>
-      <button onClick={() => filterByInitial("ㅆ")}>ㅆ</button>
-      <button onClick={() => filterByInitial("ㅇ")}>ㅇ</button>
-      <button onClick={() => filterByInitial("ㅈ")}>ㅈ</button>
-      <button onClick={() => filterByInitial("ㅊ")}>ㅊ</button>
-      <button onClick={() => filterByInitial("ㅋ")}>ㅋ</button>
-      <button onClick={() => filterByInitial("ㅌ")}>ㅌ</button>
-      <button onClick={() => filterByInitial("ㅍ")}>ㅍ</button>
-      <button onClick={() => filterByInitial("ㅎ")}>ㅎ</button>
+      {consonants.map((consonant) => (
+        <button key={consonant} onClick={() => filterByInitial(consonant)}>
+          {consonant}
+        </button>
+      ))}
     </div>
   );
 };
