@@ -1,7 +1,12 @@
 # 리그 오브 레전드 정보 앱
 
-이 프로젝트는 Riot Games의 API를 사용하여 리그 오브 레전드(LoL) 관련 정보를 제공하는 애플리케이션입니다. 사용자들은 챔피언 정보, 아이템 정보 등을 조회할 수 있습니다.
-![image](https://github.com/user-attachments/assets/6d81b227-57c1-48a3-81b3-432fae0a7267)
+이 프로젝트는 Riot Games의 API를 사용하여 리그 오브 레전드(LoL) 관련 정보를 제공하는 애플리케이션입니다. 
+사용자들은 챔피언 정보, 아이템 정보 등을 조회할 수 있습니다.
+
+
+
+![sdaasdasd](https://github.com/user-attachments/assets/e1aadc81-af50-4197-a94d-fb63bd41ff80)
+
 
 
 ## 기능
