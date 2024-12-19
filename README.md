@@ -17,12 +17,12 @@
 
 ## 기술 스택
 
-- **프레임워크**: <img src="https://img.shields.io/badge/nextdotjs-#000000?style=flat-square&logo=nextdotjs&logoColor=#000000">
-- **라이브러리**: <img src="https://img.shields.io/badge/react-#61DAFB?style=flat-square&logo=react&logoColor=#61DAFB">
-- **사용 언어**: <img src="https://img.shields.io/badge/typescript-#3178C6?style=flat-square&logo=typescript&logoColor=#3178C6">
-- **배포**: <img src="https://img.shields.io/badge/vercel-#000000?style=flat-square&logo=vercel&logoColor=#000000">
+- **프레임워크**: <img src="https://img.shields.io/badge/Next.js-000000?style=flat-square&logo=Next.js&logoColor=white"/>
+- **라이브러리**: <img src="https://img.shields.io/badge/React-61DAFB?style=flat-square&logo=React&logoColor=black"/><img src="https://img.shields.io/badge/Tailwind CSS-06B6D4?style=flat-square&logo=Tailwind CSS&logoColor=white"/>
+- **사용 언어**: <img src="https://img.shields.io/badge/Typescript-3178C6?style=flat-square&logo=Typescript&logoColor=white"/>
+- **배포**: <img src="https://img.shields.io/badge/Vercel-000000?style=flat-square&logo=Vercel&logoColor=white"/>
 - **API**: Riot Games API
 
 ## 배포 주소
 
-lolinfo.vercel.app
+https://lolinfo.vercel.app/
