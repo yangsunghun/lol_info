@@ -1,12 +1,11 @@
 "use client";
-import { ChampionList, ChampionListResponse } from "@/types/Champion";
+import { ChampionList } from "@/types/Champion";
 import { fetchChampionList, getLatestVersion } from "@/api/serverApi";
 import { useQuery } from "@tanstack/react-query";
-import CardItem from "@/components/ui/CardItem";
 import { ChampionRotation } from "@/types/ChampionRotation";
-import { Metadata } from "next";
 import CardList from "@/components/ui/CardList";
 import Loading from "../loading";
+import useRotation from "@/hooks/useRotation";
 
 // export const metadata: Metadata = {
 //   title: "LOL Info: 이번주 로테이션",
@@ -19,26 +18,8 @@ import Loading from "../loading";
 // };
 
 const RotationPage = () => {
-  const { data: latestVersion } = useQuery<string>({
-    queryKey: ["version"],
-    queryFn: getLatestVersion,
-  });
-
-  const {
-    data: rotation,
-    isPending: rotaionPending,
-    isError: rotationError,
-  } = useQuery<ChampionRotation>({
-    queryKey: ["championRotation"],
-    queryFn: async () => {
-      const res = await fetch("/api/rotation");
-      if (!res.ok)
-        throw new Error("로테이션 데이터를 가져오는 데 실패했습니다.");
-      return res.json();
-    },
-    retry: false,
-    staleTime: 1000 * 60 * 5,
-  });
+  const { latestVersion, rotation, rotationPending, rotationError } =
+    useRotation();
 
   const {
     data: champions,
@@ -50,7 +31,7 @@ const RotationPage = () => {
     staleTime: 1000 * 60 * 5,
   });
 
-  if (rotaionPending || championPending) {
+  if (rotationPending || championPending) {
     return <Loading />;
   }
 
